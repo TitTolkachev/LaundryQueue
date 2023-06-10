@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent80_black">#80000000</color>
+    <color name="transparentA6_black">#A6000000</color>
+    <color name="transparent80_black33">#805A5A5A</color>
 </resources>

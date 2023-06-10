@@ -1,5 +1,6 @@
 package com.example.washingmachine.presentation.screens.onboarding
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
@@ -8,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.washingmachine.R
 import com.example.washingmachine.presentation.screens.onboarding.adapters.ViewPagerAdapter
 import com.example.washingmachine.presentation.screens.onboarding.model.PageData
+import com.example.washingmachine.presentation.screens.auth.AuthActivity
 import com.zhpan.indicator.IndicatorView
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
@@ -29,7 +31,9 @@ class OnBoardingActivity : AppCompatActivity() {
         viewPagerButton.setOnClickListener {
             when (viewPager.currentItem) {
                 adapter.itemCount - 1 -> {
-                    // TODO
+                    val intent = Intent(this, AuthActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
 
                 else -> {

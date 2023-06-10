@@ -13,6 +13,9 @@
         android:theme="@style/Theme.WashingMachine"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.screens.auth.AuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.screens.onboarding.OnBoardingActivity"
             android:exported="true">
             <intent-filter>
