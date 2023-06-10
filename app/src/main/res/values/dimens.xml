@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_6dp">6dp</dimen>
+    <dimen name="default_10dp">10dp</dimen>
     <dimen name="default_16dp">16dp</dimen>
+    <dimen name="default_24dp">24dp</dimen>
 </resources>

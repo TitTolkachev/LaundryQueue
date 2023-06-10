@@ -26,7 +26,6 @@ class ViewPagerAdapter(
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) = holder.itemView.run {
         findViewById<ImageView>(R.id.imageView)
             .setImageResource(pages[position].drawableResource)
-        findViewById<TextView>(R.id.textView).text = pages[position].title
-        findViewById<TextView>(R.id.textView2).text = pages[position].text
+        findViewById<TextView>(R.id.textView).text = pages[position].text
     }
 }

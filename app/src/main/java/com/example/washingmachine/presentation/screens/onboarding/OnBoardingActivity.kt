@@ -1,9 +1,9 @@
 package com.example.washingmachine.presentation.screens.onboarding
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.washingmachine.R
 import com.example.washingmachine.presentation.screens.onboarding.adapters.ViewPagerAdapter
@@ -24,14 +24,28 @@ class OnBoardingActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
         viewPager.adapter = adapter
 
+
+        val viewPagerButton = findViewById<Button>(R.id.button)
+        viewPagerButton.setOnClickListener {
+            when (viewPager.currentItem) {
+                adapter.itemCount - 1 -> {
+                    // TODO
+                }
+
+                else -> {
+                    viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+                }
+            }
+        }
+
         val indicatorView = findViewById<IndicatorView>(R.id.indicatorView)
         indicatorView.apply {
-            setSliderColor(Color.BLUE, Color.BLACK)
+            setSliderColor(Color.WHITE, Color.BLACK)
             setSliderWidth(
-                resources.getDimension(R.dimen.default_6dp),
-                resources.getDimension(R.dimen.default_16dp)
+                resources.getDimension(R.dimen.default_10dp),
+                resources.getDimension(R.dimen.default_24dp)
             )
-            setSliderHeight(resources.getDimension(R.dimen.default_6dp))
+            setSliderHeight(resources.getDimension(R.dimen.default_10dp))
             setSlideMode(IndicatorSlideMode.SCALE)
             setIndicatorStyle(IndicatorStyle.ROUND_RECT)
             setPageSize(viewPager.adapter!!.itemCount)
@@ -51,8 +65,15 @@ class OnBoardingActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 indicatorView.onPageSelected(position)
 
-                val viewPagerButton = findViewById<Button>(R.id.button)
-                viewPagerButton.text = position.toString()
+                viewPagerButton.text = when (position) {
+                    adapter.itemCount - 1 -> {
+                        getString(R.string.onboarding_button_text_2)
+                    }
+
+                    else -> {
+                        getString(R.string.onboarding_button_text_1)
+                    }
+                }
             }
         })
     }
@@ -60,19 +81,16 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun getPages(): List<PageData> {
         return listOf(
             PageData(
-                drawableResource = R.drawable.ic_launcher_foreground,
-                title = "Title 1",
-                text = "Text 1"
+                drawableResource = R.drawable.image_wm_1,
+                text = getString(R.string.onboarding_text_1)
             ),
             PageData(
-                drawableResource = R.drawable.ic_launcher_background,
-                title = "Title 2",
-                text = "Text 2"
+                drawableResource = R.drawable.image_wm_2,
+                text = getString(R.string.onboarding_text_2)
             ),
             PageData(
-                drawableResource = R.drawable.ic_launcher_foreground,
-                title = "Title 3",
-                text = "Text 3"
+                drawableResource = R.drawable.image_wm_3,
+                text = getString(R.string.onboarding_text_3)
             )
         )
     }
