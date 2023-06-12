@@ -1,11 +1,15 @@
 package com.example.washingmachine.presentation.screens.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityMainBinding
+import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
+import com.example.washingmachine.presentation.screens.queue.QueueActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +30,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerViews() {
 
+        val actionListenerImpl = object : MachineCardActionListener {
+            override fun onItemClicked(machineId: String) {
+                onMachineCardClicked(machineId)
+            }
+        }
+
         val linearLayoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.layoutManager = linearLayoutManager
-        washingAdapter1 = MachinesAdapter()
+        washingAdapter1 = MachinesAdapter(actionListenerImpl)
         binding.recyclerView.adapter = washingAdapter1
 //        viewModel...observe(this) {
 //            if (it != null) {
@@ -40,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager2 =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView2.layoutManager = linearLayoutManager2
-        washingAdapter2 = MachinesAdapter()
+        washingAdapter2 = MachinesAdapter(actionListenerImpl)
         binding.recyclerView2.adapter = washingAdapter2
 //        viewModel...observe(this) {
 //            if (it != null) {
@@ -51,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager3 =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView3.layoutManager = linearLayoutManager3
-        dryerAdapter1 = MachinesAdapter()
+        dryerAdapter1 = MachinesAdapter(actionListenerImpl)
         binding.recyclerView3.adapter = dryerAdapter1
 //        viewModel...observe(this) {
 //            if (it != null) {
@@ -62,16 +72,13 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager4 =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView4.layoutManager = linearLayoutManager4
-        dryerAdapter2 = MachinesAdapter()
+        dryerAdapter2 = MachinesAdapter(actionListenerImpl)
         binding.recyclerView4.adapter = dryerAdapter2
 //        viewModel...observe(this) {
 //            if (it != null) {
 //                dryerAdapter2.data = it
 //            }
 //        }
-
-
-
 
 
         //TODO
@@ -87,5 +94,11 @@ class MainActivity : AppCompatActivity() {
         washingAdapter2.data = data
         dryerAdapter1.data = data
         dryerAdapter2.data = data
+    }
+
+    private fun onMachineCardClicked(machineId: String) {
+        val intent = Intent(this, QueueActivity::class.java)
+        intent.putExtra(getString(R.string.machine_id), machineId)
+        startActivity(intent)
     }
 }
