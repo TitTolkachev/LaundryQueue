@@ -3,31 +3,32 @@ package com.example.washingmachine.presentation.screens.onboarding
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.washingmachine.R
+import com.example.washingmachine.databinding.ActivityOnboardingBinding
+import com.example.washingmachine.presentation.screens.auth.AuthActivity
 import com.example.washingmachine.presentation.screens.onboarding.adapters.ViewPagerAdapter
 import com.example.washingmachine.presentation.screens.onboarding.model.PageData
-import com.example.washingmachine.presentation.screens.auth.AuthActivity
-import com.zhpan.indicator.IndicatorView
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 
 class OnBoardingActivity : AppCompatActivity() {
 
     private lateinit var adapter: ViewPagerAdapter
+    private lateinit var binding: ActivityOnboardingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapter = ViewPagerAdapter(pages = getPages())
-        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        val viewPager = binding.viewPager
         viewPager.adapter = adapter
 
 
-        val viewPagerButton = findViewById<Button>(R.id.button)
+        val viewPagerButton = binding.button
         viewPagerButton.setOnClickListener {
             when (viewPager.currentItem) {
                 adapter.itemCount - 1 -> {
@@ -42,7 +43,7 @@ class OnBoardingActivity : AppCompatActivity() {
             }
         }
 
-        val indicatorView = findViewById<IndicatorView>(R.id.indicatorView)
+        val indicatorView = binding.indicatorView
         indicatorView.apply {
             setSliderColor(Color.WHITE, Color.BLACK)
             setSliderWidth(
