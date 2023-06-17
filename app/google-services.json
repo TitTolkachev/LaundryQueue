@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126694091762",
+    "project_id": "laundry-queue",
+    "storage_bucket": "laundry-queue.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126694091762:android:069095e9c1a86fb68b996b",
+        "android_client_info": {
+          "package_name": "com.example.washingmachine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126694091762-1hcojfkpc3teg0nbrho18chg5smlfrql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJAYq4kc4266q7lg4tD4_EZ7i_wNjoAP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126694091762-1hcojfkpc3teg0nbrho18chg5smlfrql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
