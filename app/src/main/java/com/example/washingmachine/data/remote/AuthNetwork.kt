@@ -2,6 +2,8 @@ package com.example.washingmachine.data.remote
 
 import com.example.washingmachine.data.remote.requests.auth.AuthLogoutApi
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenApi
+import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
+import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
 import com.example.washingmachine.domain.usecase.group.AuthNetworkUseCases
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -69,4 +71,10 @@ object AuthNetwork {
 
     fun getAuthApi(useCases: AuthNetworkUseCases): AuthLogoutApi =
         getAuthRetrofit(useCases).create(AuthLogoutApi::class.java)
+
+    fun getStudentProfileApi(useCases: AuthNetworkUseCases): StudentProfileApi =
+        getAuthRetrofit(useCases).create(StudentProfileApi::class.java)
+
+    fun getAdminProfileApi(useCases: AuthNetworkUseCases): AdminProfileApi =
+        getAuthRetrofit(useCases).create(AdminProfileApi::class.java)
 }
