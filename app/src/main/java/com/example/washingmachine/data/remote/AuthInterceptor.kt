@@ -1,11 +1,12 @@
 package com.example.washingmachine.data.remote
 
+import com.example.washingmachine.domain.usecase.GetTokenFromLocalStorageUseCase
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
 class AuthInterceptor(
-    //private val getTokenFromLocalStorageUseCase: GetTokenFromLocalStorageUseCase
+    private val getTokenFromLocalStorageUseCase: GetTokenFromLocalStorageUseCase
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -14,11 +15,8 @@ class AuthInterceptor(
 
         if (request.header("Authorization") == null) {
 
-            // TODO
-            //val token = getTokenFromLocalStorageUseCase.execute()
-            //builder.addHeader("Authorization", "Bearer ${token?.accessToken}")
-
-            builder.addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsYXVuZHJ5LXF1ZXVlLWFwaSIsInN1YiI6IjRhNDk1ZDI4LTEzY2EtNDI0Mi1iODM4LTI5ZGVkNmM3ZDFiMyIsImlkIjoiNGE0OTVkMjgtMTNjYS00MjQyLWI4MzgtMjlkZWQ2YzdkMWIzIiwicm9sZSI6IlJPTEVfQURNSU4iLCJlbWFpbCI6ImV4YW1wbGVAZG9tYWluLmNvbSIsImlhdCI6MTY4NzE1NzM4MCwiZXhwIjoxNjg3MTU5MTgwfQ.hVPpFKCVDuSmHcMVjVQDFKA8KLsbOkRRjWuRc3YZoGY")
+            val token = getTokenFromLocalStorageUseCase.execute()
+            builder.addHeader("Authorization", "Bearer ${token?.access}")
         }
 
         return chain.proceed(builder.build())

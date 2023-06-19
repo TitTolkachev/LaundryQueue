@@ -3,17 +3,21 @@ package com.example.washingmachine.presentation.screens.auth
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.databinding.ActivityAuthBinding
 import com.example.washingmachine.presentation.screens.main.MainActivity
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
+    private lateinit var viewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
 
 
         // TODO
