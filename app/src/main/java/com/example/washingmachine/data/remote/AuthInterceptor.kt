@@ -18,7 +18,7 @@ class AuthInterceptor(
             //val token = getTokenFromLocalStorageUseCase.execute()
             //builder.addHeader("Authorization", "Bearer ${token?.accessToken}")
 
-            builder.addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsYXVuZHJ5LXF1ZXVlLWFwaSIsInN1YiI6IjRhNDk1ZDI4LTEzY2EtNDI0Mi1iODM4LTI5ZGVkNmM3ZDFiMyIsImlkIjoiNGE0OTVkMjgtMTNjYS00MjQyLWI4MzgtMjlkZWQ2YzdkMWIzIiwicm9sZSI6IlJPTEVfQURNSU4iLCJlbWFpbCI6ImV4YW1wbGVAZG9tYWluLmNvbSIsImlhdCI6MTY4NzAyMzk4NSwiZXhwIjoxNjg3MDI1Nzg1fQ.kFXge0_VLKuWKe1aOpmNq0NMSCCJ5SAMr-eaF3eSys8")
+            builder.addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsYXVuZHJ5LXF1ZXVlLWFwaSIsInN1YiI6IjRhNDk1ZDI4LTEzY2EtNDI0Mi1iODM4LTI5ZGVkNmM3ZDFiMyIsImlkIjoiNGE0OTVkMjgtMTNjYS00MjQyLWI4MzgtMjlkZWQ2YzdkMWIzIiwicm9sZSI6IlJPTEVfQURNSU4iLCJlbWFpbCI6ImV4YW1wbGVAZG9tYWluLmNvbSIsImlhdCI6MTY4NzE1NzM4MCwiZXhwIjoxNjg3MTU5MTgwfQ.hVPpFKCVDuSmHcMVjVQDFKA8KLsbOkRRjWuRc3YZoGY")
         }
 
         return chain.proceed(builder.build())

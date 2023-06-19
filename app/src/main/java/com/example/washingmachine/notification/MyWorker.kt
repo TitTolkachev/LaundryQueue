@@ -1,4 +1,4 @@
-package com.example.washingmachine.services
+package com.example.washingmachine.notification
 
 import android.content.Context
 import android.util.Log

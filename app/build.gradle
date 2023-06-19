@@ -52,7 +52,7 @@ dependencies {
     // ViewPager Indicators
     implementation 'com.github.zhpanvip:viewpagerindicator:1.2.2'
 
-    // FCM BoM
+    // FCM
     implementation platform('com.google.firebase:firebase-bom:32.1.1')
 
     // Retrofit
