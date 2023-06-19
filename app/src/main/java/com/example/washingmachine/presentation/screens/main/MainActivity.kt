@@ -9,6 +9,7 @@ import com.example.washingmachine.databinding.ActivityMainBinding
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
+import com.example.washingmachine.presentation.screens.profile.ProfileActivity
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initRecyclerViews()
+        binding.textView7.setOnClickListener { onProfileClicked() }
     }
 
     private fun initRecyclerViews() {
@@ -99,6 +101,11 @@ class MainActivity : AppCompatActivity() {
     private fun onMachineCardClicked(machineId: String) {
         val intent = Intent(this, QueueActivity::class.java)
         intent.putExtra(getString(R.string.machine_id), machineId)
+        startActivity(intent)
+    }
+
+    private fun onProfileClicked() {
+        val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
     }
 }
