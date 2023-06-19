@@ -1,4 +1,4 @@
-package com.example.washingmachine.domain.usecase
+package com.example.washingmachine.domain.usecase.local
 
 import com.example.washingmachine.domain.repository.EnterRepository
 

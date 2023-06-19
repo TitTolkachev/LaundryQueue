@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.data.local.prefs.enter.EnterRepositoryImpl
 import com.example.washingmachine.data.local.prefs.enter.EnterStorageImpl
-import com.example.washingmachine.domain.usecase.SetFirstEnterPassedUseCase
+import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
 
 class AuthViewModelFactory(context: Context) : ViewModelProvider.Factory {
 

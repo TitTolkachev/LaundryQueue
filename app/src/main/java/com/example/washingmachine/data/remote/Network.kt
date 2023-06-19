@@ -1,6 +1,6 @@
 package com.example.washingmachine.data.remote
 
-import com.example.washingmachine.data.remote.requests.TestApi
+import com.example.washingmachine.data.remote.requests.auth.AuthApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -26,7 +26,6 @@ object Network {
             retryOnConnectionFailure(false)
             val logLevel = HttpLoggingInterceptor.Level.BODY
             addInterceptor(HttpLoggingInterceptor().setLevel(logLevel))
-            addInterceptor(AuthInterceptor())
         }
 
         return client.build()
@@ -51,5 +50,5 @@ object Network {
 
     private var retrofit: Retrofit? = null
 
-    fun getTestApi(): TestApi = getRetrofit().create(TestApi::class.java)
+    fun getAuthApi(): AuthApi = getRetrofit().create(AuthApi::class.java)
 }

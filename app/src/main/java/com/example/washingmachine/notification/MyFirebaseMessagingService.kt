@@ -11,14 +11,9 @@ import androidx.core.app.NotificationCompat
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.washingmachine.R
-import com.example.washingmachine.data.remote.Network
-import com.example.washingmachine.data.remote.requests.TokenBody
 import com.example.washingmachine.presentation.screens.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -108,11 +103,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
 
-        GlobalScope.launch(Dispatchers.IO) {
-            Network.getTestApi().sendToken(TokenBody(token = token ?: ""))
-        }
+        //TODO(Отправка токена на сервер)
+//        GlobalScope.launch(Dispatchers.IO) {
+//            AuthNetwork.getDeviceTokenApi().sendToken(DeviceTokenDto(token = token ?: ""))
+//        }
 
-        Log.d(TAG, "sendRegistrationTokenToServer($token)")
+//        Log.d(TAG, "sendRegistrationTokenToServer($token)")
     }
 
     /**

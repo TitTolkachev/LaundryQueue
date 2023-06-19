@@ -1,6 +1,6 @@
 package com.example.washingmachine.data.remote
 
-import com.example.washingmachine.domain.usecase.GetTokenFromLocalStorageUseCase
+import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
