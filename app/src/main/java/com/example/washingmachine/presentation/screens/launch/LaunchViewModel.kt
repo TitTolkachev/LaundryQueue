@@ -29,6 +29,12 @@ class LaunchViewModel(
     private val _navigateToMain = MutableLiveData(false)
     val navigateToMain: LiveData<Boolean> = _navigateToMain
 
+    private val _navigateToAdmin = MutableLiveData(false)
+    val navigateToAdmin: LiveData<Boolean> = _navigateToAdmin
+
+    private val _navigateToEmployee = MutableLiveData(false)
+    val navigateToEmployee: LiveData<Boolean> = _navigateToEmployee
+
     init {
         val status = getFirstEnterStatusUseCase.execute()
 
@@ -59,7 +65,7 @@ class LaunchViewModel(
                     when (val profileRequest = getAdminProfileUseCase.execute()) {
                         is Resource.Success -> {
                             if (profileRequest.data?.role == Roles.ROLE_EMPLOYEE.name)
-                                _navigateToMain.postValue(true)
+                                _navigateToEmployee.postValue(true)
                             else
                                 _navigateToSignIn.postValue(true)
                         }
@@ -74,7 +80,7 @@ class LaunchViewModel(
                     when (val profileRequest = getAdminProfileUseCase.execute()) {
                         is Resource.Success -> {
                             if (profileRequest.data?.role == Roles.ROLE_ADMIN.name)
-                                _navigateToMain.postValue(true)
+                                _navigateToAdmin.postValue(true)
                             else
                                 _navigateToSignIn.postValue(true)
                         }

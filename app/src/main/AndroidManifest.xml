@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.screens.employee.EmployeeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.screens.admin.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.screens.onboarding.OnBoardingActivity"
             android:exported="false" />
 

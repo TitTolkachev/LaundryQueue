@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.databinding.ActivityLaunchBinding
+import com.example.washingmachine.presentation.screens.admin.AdminActivity
 import com.example.washingmachine.presentation.screens.auth.AuthActivity
+import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
 import com.example.washingmachine.presentation.screens.main.MainActivity
 import com.example.washingmachine.presentation.screens.onboarding.OnBoardingActivity
 
@@ -48,22 +50,20 @@ class LaunchActivity : AppCompatActivity() {
             }
         }
 
-        // TODO for employee
-//        viewModel.navigateToOnBoarding.observe(this) {
-//            if (it == true) {
-//                val intent = Intent(this, OnBoardingActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//        }
+        viewModel.navigateToAdmin.observe(this) {
+            if (it == true) {
+                val intent = Intent(this, AdminActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
 
-        // TODO for admin
-//        viewModel.navigateToOnBoarding.observe(this) {
-//            if (it == true) {
-//                val intent = Intent(this, OnBoardingActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-//        }
+        viewModel.navigateToEmployee.observe(this) {
+            if (it == true) {
+                val intent = Intent(this, EmployeeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }
