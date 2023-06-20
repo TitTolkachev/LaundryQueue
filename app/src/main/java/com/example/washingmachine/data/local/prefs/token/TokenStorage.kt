@@ -7,4 +7,6 @@ interface TokenStorage {
     fun getToken(): TokenModel?
 
     fun saveToken(token: TokenModel)
+
+    fun clearToken()
 }

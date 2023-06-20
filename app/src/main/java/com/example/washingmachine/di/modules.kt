@@ -24,6 +24,7 @@ import com.example.washingmachine.domain.repository.DeviceTokenRepository
 import com.example.washingmachine.domain.repository.EnterRepository
 import com.example.washingmachine.domain.repository.StudentProfileRepository
 import com.example.washingmachine.domain.repository.TokenRepository
+import com.example.washingmachine.domain.usecase.local.ClearLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.GetFirstEnterStatusUseCase
 import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUseCase
@@ -39,8 +40,12 @@ import com.example.washingmachine.domain.usecase.remote.SignInUseCase
 import com.example.washingmachine.domain.usecase.remote.TakeOutBalanceUseCase
 import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
+import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
+import com.example.washingmachine.presentation.screens.main.MainViewModel
+import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -74,6 +79,7 @@ val localUseCases = module {
     factory { GetTokenFromLocalStorageUseCase(get()) }
     factory { SaveTokenToLocalStorageUseCase(get()) }
     factory { SetFirstEnterPassedUseCase(get()) }
+    factory { ClearLocalStorageUseCase(get()) }
 }
 
 
@@ -100,4 +106,10 @@ val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { AdminViewModel(get())}
+    viewModel { MainViewModel(get(), get()) }
+
+    viewModel { StudentProfileViewModel(get(), get(), get(), get()) }
+    viewModel { AdminProfileViewModel(get(), get(), get(), get()) }
+    viewModel { EmployeeViewModel(get()) }
+
 }

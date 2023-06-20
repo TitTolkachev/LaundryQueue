@@ -21,8 +21,6 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //viewModel = ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
-
         viewModel = getViewModel()
 
         viewModel.navigateToMain.observe(this) {

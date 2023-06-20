@@ -22,7 +22,7 @@ class AdminActivity : AppCompatActivity() {
 
         viewModel = getViewModel()
 
-        binding.button3.setOnClickListener {
+        binding.gotToAdminProfile.setOnClickListener {
             val intent = Intent(this, AdminProfileActivity::class.java)
             startActivity(intent)
         }

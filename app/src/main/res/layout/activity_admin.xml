@@ -7,7 +7,7 @@
     tools:context=".presentation.screens.admin.AdminActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/gotToAdminProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/main_profile_background"
@@ -23,10 +23,10 @@
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/studentLogoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/gotToAdminProfile"
         app:lottie_autoPlay="true"
         app:lottie_fileName="lottie_admin.json"
         app:lottie_loop="true" />

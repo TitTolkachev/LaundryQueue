@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.databinding.ActivityEmployeeBinding
 import com.example.washingmachine.notification.MyFirebaseMessagingService
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class EmployeeActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class EmployeeActivity : AppCompatActivity() {
         binding = ActivityEmployeeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[EmployeeViewModel::class.java]
+        viewModel = getViewModel()
 
         checkDeviceToken()
     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityMainBinding
@@ -13,8 +12,9 @@ import com.example.washingmachine.notification.MyFirebaseMessagingService.Compan
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
-import com.example.washingmachine.presentation.screens.profile.ProfileActivity
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
+import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,11 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = getViewModel()
 
         initRecyclerViews()
         checkDeviceToken()
-        binding.textView7.setOnClickListener { onProfileClicked() }
+        binding.goToStudentProfile.setOnClickListener {
+            openStudentProfile()
+        }
     }
 
     private fun initRecyclerViews() {
@@ -124,8 +126,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onProfileClicked() {
-        val intent = Intent(this, ProfileActivity::class.java)
+    private fun openStudentProfile() {
+        val intent = Intent(this, StudentProfileActivity::class.java)
         startActivity(intent)
     }
 }
