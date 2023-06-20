@@ -69,4 +69,7 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:6.0.1'
+
+    //DI framework
+    implementation "io.insert-koin:koin-android:3.2.0"
 }

@@ -10,9 +10,9 @@ import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AuthRepositoryImpl : AuthRepository {
+class AuthRepositoryImpl(network: Network) : AuthRepository {
 
-    private val api = Network.getAuthApi()
+    private val api = network.getAuthApi()
 
     override suspend fun login(email: String, password: String): Resource<Token> {
         var result: Resource<Token>

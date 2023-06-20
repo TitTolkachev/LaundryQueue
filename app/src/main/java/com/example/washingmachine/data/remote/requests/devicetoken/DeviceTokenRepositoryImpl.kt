@@ -9,9 +9,9 @@ import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DeviceTokenRepositoryImpl(useCases: AuthNetworkUseCases) : DeviceTokenRepository {
+class DeviceTokenRepositoryImpl(authNetwork: AuthNetwork) : DeviceTokenRepository {
 
-    private val api = AuthNetwork.getDeviceTokenApi(useCases)
+    private val api = authNetwork.getDeviceTokenApi()
 
     override suspend fun sendToken(token: DeviceToken): Resource<Boolean> {
         var result: Resource<Boolean>

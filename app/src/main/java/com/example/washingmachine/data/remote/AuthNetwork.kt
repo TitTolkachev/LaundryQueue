@@ -1,10 +1,10 @@
 package com.example.washingmachine.data.remote
 
 import com.example.washingmachine.data.remote.requests.auth.AuthLogoutApi
+import com.example.washingmachine.data.remote.requests.balance.BalanceApi
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenApi
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
-import com.example.washingmachine.domain.usecase.group.AuthNetworkUseCases
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -14,9 +14,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
-object AuthNetwork {
+class AuthNetwork(
+    private val authInterceptor: AuthInterceptor,
+    private val tokenAuthenticator: TokenAuthenticator,
+) {
 
-    private const val BASE_URL = "http://kosterror.ru:8080/"
+    private val BASE_URL = "http://kosterror.ru:8080/"
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -24,7 +27,7 @@ object AuthNetwork {
     }
 
     private fun getHttpClient(
-        useCases: AuthNetworkUseCases
+        //useCases: AuthNetworkUseCases
     ): OkHttpClient {
         val client = OkHttpClient.Builder().apply {
             connectTimeout(5, TimeUnit.SECONDS)
@@ -32,14 +35,16 @@ object AuthNetwork {
             retryOnConnectionFailure(false)
             val logLevel = HttpLoggingInterceptor.Level.BODY
             addInterceptor(HttpLoggingInterceptor().setLevel(logLevel))
-            addInterceptor(AuthInterceptor(useCases.getTokenFromLocalStorageUseCase))
-            authenticator(
-                TokenAuthenticator(
-                    useCases.getTokenFromLocalStorageUseCase,
-                    useCases.saveTokenToLocalStorageUseCase,
-                    useCases.refreshTokenUseCase
-                )
-            )
+            //addInterceptor(AuthInterceptor(useCases.getTokenFromLocalStorageUseCase))
+            addInterceptor(authInterceptor)
+            authenticator(tokenAuthenticator)
+//            authenticator(
+//                TokenAuthenticator(
+//                    useCases.getTokenFromLocalStorageUseCase,
+//                    useCases.saveTokenToLocalStorageUseCase,
+//                    useCases.refreshTokenUseCase
+//                )
+//            )
         }
 
         return client.build()
@@ -47,7 +52,7 @@ object AuthNetwork {
 
     @OptIn(ExperimentalSerializationApi::class)
     private fun getAuthRetrofit(
-        useCases: AuthNetworkUseCases
+        //useCases: AuthNetworkUseCases
     ): Retrofit {
 
         if (authRetrofit != null)
@@ -58,7 +63,7 @@ object AuthNetwork {
             .addConverterFactory(
                 json.asConverterFactory("application/json".toMediaType())
             )
-            .client(getHttpClient(useCases))
+            .client(getHttpClient())
             .build()
 
         return authRetrofit as Retrofit
@@ -66,15 +71,17 @@ object AuthNetwork {
 
     private var authRetrofit: Retrofit? = null
 
-    fun getDeviceTokenApi(useCases: AuthNetworkUseCases): DeviceTokenApi =
-        getAuthRetrofit(useCases).create(DeviceTokenApi::class.java)
+    fun getDeviceTokenApi(): DeviceTokenApi =
+        getAuthRetrofit().create(DeviceTokenApi::class.java)
 
-    fun getAuthApi(useCases: AuthNetworkUseCases): AuthLogoutApi =
-        getAuthRetrofit(useCases).create(AuthLogoutApi::class.java)
+    fun getAuthApi(): AuthLogoutApi =
+        getAuthRetrofit().create(AuthLogoutApi::class.java)
 
-    fun getStudentProfileApi(useCases: AuthNetworkUseCases): StudentProfileApi =
-        getAuthRetrofit(useCases).create(StudentProfileApi::class.java)
+    fun getStudentProfileApi(): StudentProfileApi =
+        getAuthRetrofit().create(StudentProfileApi::class.java)
 
-    fun getAdminProfileApi(useCases: AuthNetworkUseCases): AdminProfileApi =
-        getAuthRetrofit(useCases).create(AdminProfileApi::class.java)
+    fun getAdminProfileApi(): AdminProfileApi =
+        getAuthRetrofit().create(AdminProfileApi::class.java)
+
+    fun getBalanceApi(): BalanceApi = getAuthRetrofit().create(BalanceApi::class.java)
 }

@@ -12,20 +12,20 @@ import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUs
 import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
 import com.example.washingmachine.domain.usecase.remote.SignInUseCase
 
-class AuthViewModelFactory(context: Context) : ViewModelProvider.Factory {
-
-    private val signInUseCase = SignInUseCase(AuthRepositoryImpl())
-    private val saveTokenToLocalStorageUseCase =
-        SaveTokenToLocalStorageUseCase(TokenRepositoryImpl(TokenStorageImpl(context)))
-
-    private val enterRepository = EnterRepositoryImpl(EnterStorageImpl(context))
-    private val setFirstEnterPassedUseCase = SetFirstEnterPassedUseCase(enterRepository)
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AuthViewModel(
-            signInUseCase,
-            saveTokenToLocalStorageUseCase,
-            setFirstEnterPassedUseCase
-        ) as T
-    }
-}
+//class AuthViewModelFactory(context: Context) : ViewModelProvider.Factory {
+//
+//    private val signInUseCase = SignInUseCase(AuthRepositoryImpl())
+//    private val saveTokenToLocalStorageUseCase =
+//        SaveTokenToLocalStorageUseCase(TokenRepositoryImpl(TokenStorageImpl(context)))
+//
+//    private val enterRepository = EnterRepositoryImpl(EnterStorageImpl(context))
+//    private val setFirstEnterPassedUseCase = SetFirstEnterPassedUseCase(enterRepository)
+//
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        return AuthViewModel(
+//            signInUseCase,
+//            saveTokenToLocalStorageUseCase,
+//            setFirstEnterPassedUseCase
+//        ) as T
+//    }
+//}

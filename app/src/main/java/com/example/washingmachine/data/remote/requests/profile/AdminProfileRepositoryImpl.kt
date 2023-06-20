@@ -10,9 +10,9 @@ import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AdminProfileRepositoryImpl(useCases: AuthNetworkUseCases) : AdminProfileRepository {
+class AdminProfileRepositoryImpl(authNetwork: AuthNetwork) : AdminProfileRepository {
 
-    private val api = AuthNetwork.getAdminProfileApi(useCases)
+    private val api = authNetwork.getAdminProfileApi()
 
     override suspend fun getInfo(): Resource<AdminInfo> {
         var result: Resource<AdminInfo>
@@ -29,6 +29,7 @@ class AdminProfileRepositoryImpl(useCases: AuthNetworkUseCases) : AdminProfileRe
                             request.body()?.surname,
                             request.body()?.money,
                             request.body()?.role,
+                            request.body()?.dormitoryId
                         )
                     )
                 } else {
@@ -63,6 +64,7 @@ class AdminProfileRepositoryImpl(useCases: AuthNetworkUseCases) : AdminProfileRe
                             request.body()?.surname,
                             request.body()?.money,
                             request.body()?.role,
+                            request.body()?.dormitoryId
                         )
                     )
                 } else {

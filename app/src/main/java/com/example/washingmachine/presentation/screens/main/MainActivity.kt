@@ -13,6 +13,7 @@ import com.example.washingmachine.notification.MyFirebaseMessagingService.Compan
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
+import com.example.washingmachine.presentation.screens.profile.ProfileActivity
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         initRecyclerViews()
         checkDeviceToken()
+        binding.textView7.setOnClickListener { onProfileClicked() }
     }
 
     private fun initRecyclerViews() {
@@ -120,5 +122,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.sendDeviceToken(token)
             preferences.edit().remove(DEVICE_TOKEN).apply()
         }
+    }
+
+    private fun onProfileClicked() {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
     }
 }

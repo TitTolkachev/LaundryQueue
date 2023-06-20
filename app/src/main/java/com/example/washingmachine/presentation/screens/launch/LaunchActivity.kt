@@ -10,6 +10,7 @@ import com.example.washingmachine.presentation.screens.auth.AuthActivity
 import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
 import com.example.washingmachine.presentation.screens.main.MainActivity
 import com.example.washingmachine.presentation.screens.onboarding.OnBoardingActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @SuppressLint("CustomSplashScreen")
 class LaunchActivity : AppCompatActivity() {
@@ -19,8 +20,10 @@ class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel =
-            ViewModelProvider(this, LaunchViewModelFactory(this))[LaunchViewModel::class.java]
+        viewModel = getViewModel()
+
+//        viewModel =
+//            ViewModelProvider(this, LaunchViewModelFactory(this))[LaunchViewModel::class.java]
 
         viewModel.navigateToOnBoarding.observe(this) {
             if (it == true) {
