@@ -1,17 +1,8 @@
 package com.example.washingmachine.notification
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.example.washingmachine.R
-import com.example.washingmachine.presentation.screens.main.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -102,12 +93,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      */
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
-
-        val preferences = application.getSharedPreferences(
-            APP_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-        preferences.edit().putString(DEVICE_TOKEN, token).apply()
     }
 
     /**
@@ -116,43 +101,41 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     private fun sendNotification(messageBody: String) {
-        val requestCode = 0
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            requestCode,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE,
-        )
-
-        val channelId = getString(R.string.default_notification_channel_id)
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.push_notification_icon)
-            .setContentTitle(getString(R.string.fcm_message))
-            .setContentText(messageBody)
-            .setAutoCancel(true)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
-
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        val channel = NotificationChannel(
-            channelId,
-            "Channel human readable title",
-            NotificationManager.IMPORTANCE_DEFAULT,
-        )
-        notificationManager.createNotificationChannel(channel)
-
-        val notificationId = 0
-        notificationManager.notify(notificationId, notificationBuilder.build())
+//        val requestCode = 0
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//        val pendingIntent = PendingIntent.getActivity(
+//            this,
+//            requestCode,
+//            intent,
+//            PendingIntent.FLAG_IMMUTABLE,
+//        )
+//
+//        val channelId = getString(R.string.default_notification_channel_id)
+//        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+//        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+//            .setSmallIcon(R.drawable.push_notification_icon)
+//            .setContentTitle(getString(R.string.fcm_message))
+//            .setContentText(messageBody)
+//            .setAutoCancel(true)
+//            .setSound(defaultSoundUri)
+//            .setContentIntent(pendingIntent)
+//
+//        val notificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//
+//        val channel = NotificationChannel(
+//            channelId,
+//            "Channel human readable title",
+//            NotificationManager.IMPORTANCE_DEFAULT,
+//        )
+//        notificationManager.createNotificationChannel(channel)
+//
+//        val notificationId = 0
+//        notificationManager.notify(notificationId, notificationBuilder.build())
     }
 
     companion object {
         private const val TAG = "MyFirebaseMsgService"
-        const val APP_PREFERENCES = "preferences_settings"
-        const val DEVICE_TOKEN = "device_token_status"
     }
 }

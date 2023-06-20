@@ -1,20 +1,17 @@
 package com.example.washingmachine.presentation.screens.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityMainBinding
-import com.example.washingmachine.notification.MyFirebaseMessagingService.Companion.APP_PREFERENCES
-import com.example.washingmachine.notification.MyFirebaseMessagingService.Companion.DEVICE_TOKEN
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
 import com.example.washingmachine.presentation.screens.profile.ProfileActivity
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,10 +28,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = getViewModel()
 
         initRecyclerViews()
-        checkDeviceToken()
         binding.textView7.setOnClickListener { onProfileClicked() }
     }
 
@@ -110,18 +106,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, QueueActivity::class.java)
         intent.putExtra(getString(R.string.machine_id), machineId)
         startActivity(intent)
-    }
-
-    private fun checkDeviceToken() {
-        val preferences = baseContext.getSharedPreferences(
-            APP_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-        val token = preferences.getString(DEVICE_TOKEN, "")
-        if (!token.isNullOrBlank()) {
-            viewModel.sendDeviceToken(token)
-            preferences.edit().remove(DEVICE_TOKEN).apply()
-        }
     }
 
     private fun onProfileClicked() {

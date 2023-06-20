@@ -41,6 +41,7 @@ import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
+import com.example.washingmachine.presentation.screens.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -97,7 +98,8 @@ val storage = module {
 
 
 val viewModels = module {
-    viewModel { AuthViewModel(get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
-    viewModel { AdminViewModel(get())}
+    viewModel { AdminViewModel()}
+    viewModel { MainViewModel()}
 }

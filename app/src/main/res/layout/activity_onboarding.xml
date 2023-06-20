@@ -23,6 +23,7 @@
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/transparent80_black"
         android:text="Button"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/indicatorView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
