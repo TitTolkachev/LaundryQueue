@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.screens.editmachine.EditMachineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.screens.adminprofile.AdminProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.screens.adminmachines.AdminMachinesActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.screens.employee.EmployeeActivity"
             android:exported="false" />
         <activity

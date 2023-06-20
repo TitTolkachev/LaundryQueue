@@ -6,13 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screens.admin.AdminActivity">
 
-    <TextView
-        android:id="@+id/textView14"
+    <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Admin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/main_profile_background"
+        android:paddingStart="44dp"
+        android:paddingTop="52dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="16dp"
+        android:text="Profile"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie_admin.json"
+        app:lottie_loop="true" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="12dp"
+        android:text="Machines"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="@+id/button5" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="12dp"
+        android:text="Add Student"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="@+id/button6"
+        app:layout_constraintStart_toStartOf="@+id/button6" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="12dp"
+        android:text="Add Employee"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

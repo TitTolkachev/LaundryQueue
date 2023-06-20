@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.washingmachine.databinding.ActivityLaunchBinding
 import com.example.washingmachine.presentation.screens.admin.AdminActivity
 import com.example.washingmachine.presentation.screens.auth.AuthActivity
 import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
@@ -15,13 +14,10 @@ import com.example.washingmachine.presentation.screens.onboarding.OnBoardingActi
 @SuppressLint("CustomSplashScreen")
 class LaunchActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLaunchBinding
     private lateinit var viewModel: LaunchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLaunchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         viewModel =
             ViewModelProvider(this, LaunchViewModelFactory(this))[LaunchViewModel::class.java]
@@ -30,6 +26,7 @@ class LaunchActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, OnBoardingActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
         }
@@ -38,6 +35,7 @@ class LaunchActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, AuthActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
         }
@@ -46,6 +44,7 @@ class LaunchActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
         }
@@ -54,6 +53,7 @@ class LaunchActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
         }
@@ -62,6 +62,7 @@ class LaunchActivity : AppCompatActivity() {
             if (it == true) {
                 val intent = Intent(this, EmployeeActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 finish()
             }
         }
