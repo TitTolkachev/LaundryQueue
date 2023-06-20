@@ -34,6 +34,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/onboarding_gray_background"
@@ -59,11 +60,12 @@
         app:layout_constraintTop_toTopOf="@+id/guideline">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/onboarding_gray_background"
             android:hint="Password"
-            android:inputType="numberPassword"
+            android:inputType="text|textPassword"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="#DAFFFFFF" />
@@ -78,6 +80,7 @@
         android:paddingHorizontal="48dp"
         android:paddingVertical="14dp"
         android:text="Sign In"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

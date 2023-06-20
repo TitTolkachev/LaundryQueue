@@ -1,9 +1,22 @@
 <resources>
-    <string name="app_name">LaundryQueue</string>
+    <string name="app_name">Laundry Queue</string>
+
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <!-- [START fcm_default_icon_string] -->
+    <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <!-- [END fcm_default_icon_string] -->
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="fcm_message">FCM Message</string>
 
     <!-- Intents extras -->
     <string name="machine_id">machine_id</string>
-    
+
+
     <!-- OnBoarding -->
     <string name="onboarding_text_1">Manage the laundry queue</string>
     <string name="onboarding_text_2">Pay for Laundry in the app</string>
