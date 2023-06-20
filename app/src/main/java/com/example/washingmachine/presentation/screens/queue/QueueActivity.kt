@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityQueueBinding
+import com.example.washingmachine.presentation.dialog.AlertDialog
+import com.example.washingmachine.presentation.dialog.AlertType
+import com.example.washingmachine.presentation.dialog.showAlertDialog
 import com.example.washingmachine.presentation.screens.queue.adapters.QueueAdapter
+import com.example.washingmachine.presentation.screens.queue.adapters.QueueCardActionListener
 import com.example.washingmachine.presentation.screens.queue.model.QueueSlot
 import com.example.washingmachine.presentation.screens.queue.model.QueueSlotTypes
+import com.google.android.material.snackbar.Snackbar
 
-class QueueActivity : AppCompatActivity() {
+
+class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
 
     private lateinit var binding: ActivityQueueBinding
 
@@ -32,7 +38,14 @@ class QueueActivity : AppCompatActivity() {
         val layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView5.layoutManager = layoutManager
-        adapter = QueueAdapter()
+        adapter = QueueAdapter(object : QueueCardActionListener {
+            override fun onItemClicked(id: String, status: QueueSlotTypes) {
+                if (status == QueueSlotTypes.AVAILABLE)
+                    onAvailableSlotClicked(id)
+                if (status == QueueSlotTypes.SELF)
+                    onSlotCancelClicked(id)
+            }
+        })
         binding.recyclerView5.adapter = adapter
 //        viewModel...observe(this) {
 //            if (it != null) {
@@ -71,11 +84,22 @@ class QueueActivity : AppCompatActivity() {
         adapter.data = data
     }
 
-    private fun onAvailableSlotClicked(){
-
+    private fun onAvailableSlotClicked(id: String) {
+        showAlertDialog(AlertType.DEFAULT)//viewModel.alertType.value ?: AlertType.DEFAULT)
     }
 
-    private fun onSlotCancelClicked(){
+    private fun onSlotCancelClicked(id: String) {
+        showAlertDialog(AlertType.DEFAULT)//viewModel.alertType.value ?: AlertType.DEFAULT)
+    }
 
+    override fun alertDialogRetry() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAlertDialogDismiss() {
+        Snackbar.make(binding.root, "Hey you lost your 75 rubbles Mamont!!", Snackbar.LENGTH_LONG)
+            .setAction("CLOSE") { }
+            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+            .show()
     }
 }

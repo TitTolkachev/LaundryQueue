@@ -2,6 +2,7 @@ package com.example.washingmachine.presentation.screens.queue.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.washingmachine.databinding.ItemQueueAvailableSlotBinding
@@ -10,7 +11,8 @@ import com.example.washingmachine.databinding.ItemQueueSelfSlotBinding
 import com.example.washingmachine.presentation.screens.queue.model.QueueSlot
 import com.example.washingmachine.presentation.screens.queue.model.QueueSlotTypes
 
-class QueueAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class QueueAdapter(private val actionListener: QueueCardActionListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     var data = mutableListOf<QueueSlot>()
         @SuppressLint("NotifyDataSetChanged")
@@ -24,6 +26,7 @@ class QueueAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: QueueSlot, index: Int) {
             with(binding) {
                 //TODO
+                root.tag = item.id
                 textView3.text = index.toString()
             }
         }
@@ -45,6 +48,7 @@ class QueueAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: QueueSlot, index: Int) {
             with(binding) {
                 //TODO
+                root.tag = item.id
                 textView3.text = index.toString()
             }
         }
@@ -78,14 +82,17 @@ class QueueAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
             is QueueAvailableViewHolder -> {
                 holder.bind(data[position], position + 1)
+                holder.binding.root.setOnClickListener(this@QueueAdapter)
             }
 
             is QueueNotAvailableViewHolder -> {
                 holder.bind(data[position], position + 1)
+                holder.binding.root.setOnClickListener(this@QueueAdapter)
             }
 
             is QueueSelfViewHolder -> {
                 holder.bind(data[position], position + 1)
+                holder.binding.root.setOnClickListener(this@QueueAdapter)
             }
         }
     }
@@ -98,4 +105,14 @@ class QueueAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             return 2
         return 3
     }
+
+    override fun onClick(v: View) {
+        val id = v.tag as String
+        val status = data.first { it.id == id }.type
+        actionListener.onItemClicked(id, status)
+    }
+}
+
+interface QueueCardActionListener {
+    fun onItemClicked(id: String, status: QueueSlotTypes)
 }
