@@ -31,7 +31,6 @@ class StudentProfileViewModel(
         viewModelScope.launch {
             when (val data = getStudentProfileUseCase.execute()) {
                 is Resource.Success -> {
-                    clearLocalStorageUseCase.execute()
                     studentLiveData.postValue(data.data)
                 }
 
@@ -44,9 +43,9 @@ class StudentProfileViewModel(
 
     fun logout() {
         viewModelScope.launch {
-            when (val data =
-                logoutUseCase.execute(getTokenFromLocalStorageUseCase.execute()?.refresh ?: "")) {
+            when (logoutUseCase.execute(getTokenFromLocalStorageUseCase.execute()?.refresh ?: "")) {
                 is Resource.Success -> {
+                    clearLocalStorageUseCase.execute()
                     navigateToAuth.postValue(true)
                 }
 

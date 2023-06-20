@@ -46,7 +46,6 @@ import com.example.washingmachine.presentation.screens.employee.EmployeeViewMode
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
 import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
-import com.example.washingmachine.presentation.screens.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -106,13 +105,11 @@ val storage = module {
 val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
-    viewModel { AdminViewModel()}
-    viewModel { MainViewModel()}
-    viewModel { AdminViewModel(get())}
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainViewModel(get()) }
+    viewModel { AdminViewModel() }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get()) }
     viewModel { AdminProfileViewModel(get(), get(), get(), get()) }
-    viewModel { EmployeeViewModel(get()) }
+    viewModel { EmployeeViewModel() }
 
 }

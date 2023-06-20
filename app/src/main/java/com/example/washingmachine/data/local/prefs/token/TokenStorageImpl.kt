@@ -32,10 +32,10 @@ class TokenStorageImpl(context: Context) : TokenStorage {
         preferences.edit().putString(ROLE_NAME, token.role).apply()
     }
 
-    override fun clearToken(){
+    override fun clearToken() {
         preferences.edit().putString(ACCESS_TOKEN_NAME, "").apply()
-        preferences.edit().putString(ACCESS_TOKEN_NAME, "").apply()
-        preferences.edit().putString(ACCESS_TOKEN_NAME, "").apply()
+        preferences.edit().putString(REFRESH_TOKEN_NAME, "").apply()
+        preferences.edit().putString(ROLE_NAME, "").apply()
     }
 
 }
