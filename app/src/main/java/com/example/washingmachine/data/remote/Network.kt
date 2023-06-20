@@ -1,9 +1,7 @@
 package com.example.washingmachine.data.remote
 
 import com.example.washingmachine.data.remote.requests.auth.AuthApi
-import com.example.washingmachine.data.remote.requests.balance.BalanceApi
-import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
-import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
+import com.example.washingmachine.data.remote.requests.dormitory.DormitoryApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -11,7 +9,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class Network {
@@ -55,5 +52,7 @@ class Network {
     private var retrofit: Retrofit? = null
 
     fun getAuthApi(): AuthApi = getRetrofit().create(AuthApi::class.java)
+
+    fun getDormitoryApi(): DormitoryApi = getRetrofit().create(DormitoryApi::class.java)
 
 }

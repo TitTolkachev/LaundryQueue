@@ -7,5 +7,5 @@ data class StudentInfo(
     val name: String? = null,
     val surname: String? = null,
     val room: String? = null,
-    val money: Double? = null
+    val money: Int? = null
 )

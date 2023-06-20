@@ -1,14 +1,15 @@
 package com.example.washingmachine.data.remote.dto
 
+import com.example.washingmachine.domain.model.Roles
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StudentProfileResponseDto(
+data class PersonDto(
     val id: String?,
-    val dormitoryId: String?,
     val email: String?,
     val name: String?,
     val surname: String?,
-    val room: String?,
-    val money: Int?
+    val money: Float?,
+    val role: Roles?,
+    val dormitoryId: String?
 )

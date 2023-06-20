@@ -14,6 +14,7 @@ import com.example.washingmachine.data.remote.requests.auth.AuthLogoutRepository
 import com.example.washingmachine.data.remote.requests.auth.AuthRepositoryImpl
 import com.example.washingmachine.data.remote.requests.balance.BalanceRepositoryIml
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenRepositoryImpl
+import com.example.washingmachine.data.remote.requests.dormitory.DormitoryRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileRepositoryImpl
 import com.example.washingmachine.domain.repository.AdminProfileRepository
@@ -21,6 +22,7 @@ import com.example.washingmachine.domain.repository.AuthLogoutRepository
 import com.example.washingmachine.domain.repository.AuthRepository
 import com.example.washingmachine.domain.repository.BalanceRepository
 import com.example.washingmachine.domain.repository.DeviceTokenRepository
+import com.example.washingmachine.domain.repository.DormitoryRepository
 import com.example.washingmachine.domain.repository.EnterRepository
 import com.example.washingmachine.domain.repository.StudentProfileRepository
 import com.example.washingmachine.domain.repository.TokenRepository
@@ -32,6 +34,7 @@ import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCas
 import com.example.washingmachine.domain.usecase.remote.EditAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.EditStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
+import com.example.washingmachine.domain.usecase.remote.GetDormitoriesUseCase
 import com.example.washingmachine.domain.usecase.remote.GetStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.LogoutUseCase
 import com.example.washingmachine.domain.usecase.remote.RefreshTokenUseCase
@@ -42,6 +45,7 @@ import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
@@ -72,6 +76,7 @@ val remoteUseCases = module {
     factory { SignInUseCase(get()) }
     factory { TakeOutBalanceUseCase(get()) }
     factory { TopUpBalanceUseCase(get()) }
+    factory { GetDormitoriesUseCase(get()) }
 }
 
 val localUseCases = module {
@@ -93,7 +98,7 @@ val repositories = module {
     factory<DeviceTokenRepository> { DeviceTokenRepositoryImpl(get()) }
     factory<AdminProfileRepository> { AdminProfileRepositoryImpl(get()) }
     factory<StudentProfileRepository> { StudentProfileRepositoryImpl(get()) }
-
+    factory<DormitoryRepository> { DormitoryRepositoryImpl(get()) }
 }
 
 val storage = module {
@@ -108,8 +113,10 @@ val viewModels = module {
     viewModel { MainViewModel(get()) }
     viewModel { AdminViewModel() }
 
-    viewModel { StudentProfileViewModel(get(), get(), get(), get(), get()) }
-    viewModel { AdminProfileViewModel(get(), get(), get(), get()) }
+    viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { AdminProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { EmployeeViewModel() }
+
+    viewModel { EditStudentProfileViewModel(get(), get(), get()) }
 
 }

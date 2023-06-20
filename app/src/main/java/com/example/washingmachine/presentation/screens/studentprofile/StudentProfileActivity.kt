@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.washingmachine.databinding.ActivityStudentProfileBinding
 import com.example.washingmachine.presentation.screens.auth.AuthActivity
+import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileActivity
 import com.example.washingmachine.presentation.screens.studentprofile.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -30,6 +31,10 @@ class StudentProfileActivity : AppCompatActivity() {
             viewModel.logout()
         }
 
+        binding.editStudentButton.setOnClickListener {
+            openEditStudentProfile()
+        }
+
         viewModel.getNavigationToAuthLiveData().observe(this) {
             if (it) {
                 val intent = Intent(this, AuthActivity::class.java)
@@ -43,18 +48,32 @@ class StudentProfileActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getStudentProfileLiveData().observe(this) {
-            binding.studentBalance.text = it.money.toString()
-            binding.studentEmail.text = it.email
-            binding.studentName.text = it.name
-            binding.studentSurname.text = it.surname
-            binding.studentRoom.text = it.room
+        viewModel.getStudentProfileLiveData().observe(this) { data ->
+            binding.studentBalance.text = data.money.toString()
+            binding.studentEmail.text = data.email
+            binding.studentName.text = data.name
+            binding.studentSurname.text = data.surname
+            binding.studentRoom.text = data.room
 
+            binding.studentDormitory.text = viewModel.getDormitories()
+                .firstOrNull { it.id == data.dormitoryId }?.number.toString()
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshData()
+    }
+
+    private fun openEditStudentProfile() {
+        val intent = Intent(this, EditStudentProfileActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun showBottomSheet() {
-        val bottomSheetFragment = BottomSheetDialog()
+        val bottomSheetFragment = BottomSheetDialog() {
+            viewModel.topUpBalance(it)
+        }
         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.washingmachine.databinding.ActivityAdminProfileBinding
 import com.example.washingmachine.presentation.screens.auth.AuthActivity
+import com.example.washingmachine.presentation.screens.studentprofile.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AdminProfileActivity : AppCompatActivity() {
@@ -25,6 +26,10 @@ class AdminProfileActivity : AppCompatActivity() {
             viewModel.logout()
         }
 
+        binding.takeOutMoneyButton.setOnClickListener {
+            showBottomSheet()
+        }
+
         viewModel.getLiveDataForAuthNavigation().observe(this) {
             if (it) {
                 val intent = Intent(this, AuthActivity::class.java)
@@ -37,5 +42,12 @@ class AdminProfileActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun showBottomSheet() {
+        val bottomSheetFragment = BottomSheetDialog() {
+            viewModel.takeOutMoney(it)
+        }
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 }
