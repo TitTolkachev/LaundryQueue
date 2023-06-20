@@ -50,7 +50,7 @@
             android:name=".presentation.screens.queue.QueueActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.screens.profile.ProfileActivity"
+            android:name=".presentation.screens.studentprofile.StudentProfileActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.screens.main.MainActivity"

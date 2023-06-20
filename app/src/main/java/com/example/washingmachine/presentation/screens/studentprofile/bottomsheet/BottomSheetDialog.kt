@@ -1,4 +1,4 @@
-package com.example.washingmachine.presentation.screens.profile.bottomsheet
+package com.example.washingmachine.presentation.screens.studentprofile.bottomsheet
 
 import android.os.Bundle
 import android.text.Editable
@@ -12,13 +12,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragment() {
 
-    private lateinit var viewModel : BottomSheetViewModel
     private lateinit var bottomSheetBinding: BottomSheetTopUpBalanceDialogBinding
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java]
+
     }
 
     override fun onCreateView(
@@ -47,7 +46,8 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
         }
 
         bottomSheetBinding.saveButton.setOnClickListener {
-            viewModel.topUpValue(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
+            //viewModel.topUpValue(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
+
         }
 
         bottomSheetBinding.editTextNumberDecimal.setText(balance.toString())

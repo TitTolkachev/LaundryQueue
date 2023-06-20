@@ -1,5 +1,6 @@
 package com.example.washingmachine.data.remote.requests.profile
 
+import android.util.Log
 import com.example.washingmachine.data.remote.AuthNetwork
 import com.example.washingmachine.data.remote.dto.StudentProfileRequestDto
 import com.example.washingmachine.domain.model.StudentEditRequestBody

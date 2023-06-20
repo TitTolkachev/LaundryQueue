@@ -22,9 +22,6 @@ class LaunchActivity : AppCompatActivity() {
 
         viewModel = getViewModel()
 
-//        viewModel =
-//            ViewModelProvider(this, LaunchViewModelFactory(this))[LaunchViewModel::class.java]
-
         viewModel.navigateToOnBoarding.observe(this) {
             if (it == true) {
                 val intent = Intent(this, OnBoardingActivity::class.java)

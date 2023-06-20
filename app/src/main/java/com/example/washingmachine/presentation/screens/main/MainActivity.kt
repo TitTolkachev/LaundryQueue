@@ -9,7 +9,6 @@ import com.example.washingmachine.databinding.ActivityMainBinding
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.main.model.MachineCard
-import com.example.washingmachine.presentation.screens.profile.ProfileActivity
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -31,7 +30,9 @@ class MainActivity : AppCompatActivity() {
         viewModel = getViewModel()
 
         initRecyclerViews()
-        binding.textView7.setOnClickListener { onProfileClicked() }
+        binding.goToStudentProfile.setOnClickListener {
+            openStudentProfile()
+        }
     }
 
     private fun initRecyclerViews() {
@@ -108,8 +109,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun onProfileClicked() {
-        val intent = Intent(this, ProfileActivity::class.java)
+    private fun openStudentProfile() {
+        val intent = Intent(this, StudentProfileActivity::class.java)
         startActivity(intent)
     }
 }
