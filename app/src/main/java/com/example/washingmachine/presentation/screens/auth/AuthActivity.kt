@@ -8,10 +8,12 @@ import com.example.washingmachine.databinding.ActivityAuthBinding
 import com.example.washingmachine.presentation.screens.admin.AdminActivity
 import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
 import com.example.washingmachine.presentation.screens.main.MainActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AuthActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthBinding
+
     private lateinit var viewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,9 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
+        //viewModel = ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
+
+        viewModel = getViewModel()
 
         viewModel.navigateToMain.observe(this) {
             if (it == true) {

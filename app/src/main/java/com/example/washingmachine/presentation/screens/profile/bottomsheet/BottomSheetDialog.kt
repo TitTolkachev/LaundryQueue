@@ -3,7 +3,6 @@ package com.example.washingmachine.presentation.screens.profile.bottomsheet
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
         }
 
         bottomSheetBinding.saveButton.setOnClickListener {
-            viewModel.saveData(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
+            viewModel.topUpValue(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
         }
 
         bottomSheetBinding.editTextNumberDecimal.setText(balance.toString())

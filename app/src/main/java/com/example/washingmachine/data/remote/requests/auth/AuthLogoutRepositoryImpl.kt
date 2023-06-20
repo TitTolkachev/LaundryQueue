@@ -3,14 +3,13 @@ package com.example.washingmachine.data.remote.requests.auth
 import com.example.washingmachine.data.remote.AuthNetwork
 import com.example.washingmachine.data.remote.dto.LogoutRequestDto
 import com.example.washingmachine.domain.repository.AuthLogoutRepository
-import com.example.washingmachine.domain.usecase.group.AuthNetworkUseCases
 import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AuthLogoutRepositoryImpl(useCases: AuthNetworkUseCases) : AuthLogoutRepository {
+class AuthLogoutRepositoryImpl(authNetwork: AuthNetwork) : AuthLogoutRepository {
 
-    private val authApi = AuthNetwork.getAuthApi(useCases = useCases)
+    private val authApi = authNetwork.getAuthApi()
 
     override suspend fun logout(refreshToken: String): Resource<Boolean> {
         var result: Resource<Boolean>

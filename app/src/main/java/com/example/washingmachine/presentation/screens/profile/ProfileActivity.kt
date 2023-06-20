@@ -9,7 +9,6 @@ import com.example.washingmachine.presentation.screens.profile.bottomsheet.Botto
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)

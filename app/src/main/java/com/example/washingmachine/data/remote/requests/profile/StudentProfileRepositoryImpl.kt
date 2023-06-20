@@ -10,9 +10,9 @@ import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class StudentProfileRepositoryImpl(useCases: AuthNetworkUseCases) : StudentProfileRepository {
+class StudentProfileRepositoryImpl(authNetwork: AuthNetwork) : StudentProfileRepository {
 
-    private val api = AuthNetwork.getStudentProfileApi(useCases)
+    private val api = authNetwork.getStudentProfileApi()
 
     override suspend fun getInfo(): Resource<StudentInfo> {
         var result: Resource<StudentInfo>
