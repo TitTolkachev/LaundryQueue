@@ -103,7 +103,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
 
-        val preferences = baseContext.getSharedPreferences(
+        val preferences = application.getSharedPreferences(
             APP_PREFERENCES,
             Context.MODE_PRIVATE
         )

@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.databinding.ActivityAdminBinding
 import com.example.washingmachine.notification.MyFirebaseMessagingService
 import com.example.washingmachine.presentation.screens.adminmachines.AdminMachinesActivity
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AdminActivity : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[AdminViewModel::class.java]
+        viewModel = getViewModel()
 
         binding.button3.setOnClickListener {
             val intent = Intent(this, AdminProfileActivity::class.java)
