@@ -108,7 +108,7 @@ val viewModels = module {
     viewModel { MainViewModel(get()) }
     viewModel { AdminViewModel() }
 
-    viewModel { StudentProfileViewModel(get(), get(), get(), get()) }
+    viewModel { StudentProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { AdminProfileViewModel(get(), get(), get(), get()) }
     viewModel { EmployeeViewModel() }
 

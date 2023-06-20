@@ -3,22 +3,21 @@ package com.example.washingmachine.presentation.screens.studentprofile.bottomshe
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import com.example.washingmachine.databinding.BottomSheetTopUpBalanceDialogBinding
+import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragment() {
 
     private lateinit var bottomSheetBinding: BottomSheetTopUpBalanceDialogBinding
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
+    private val viewModel: StudentProfileViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +35,7 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
 
         bottomSheetBinding.lower.setOnClickListener {
             val num = bottomSheetBinding.editTextNumberDecimal.text.toString().toIntOrNull()?.let {
-                if (it > 0 ){
+                if (it > 0) {
                     it - 1
                 } else {
                     it
@@ -46,8 +45,8 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
         }
 
         bottomSheetBinding.saveButton.setOnClickListener {
-            //viewModel.topUpValue(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
-
+            Log.d("!!!!", bottomSheetBinding.editTextNumberDecimal.text.toString())
+            viewModel.topUpBalance(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
         }
 
         bottomSheetBinding.editTextNumberDecimal.setText(balance.toString())
