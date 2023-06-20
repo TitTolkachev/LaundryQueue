@@ -103,12 +103,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
 
-        //TODO(Отправка токена на сервер)
-//        GlobalScope.launch(Dispatchers.IO) {
-//            AuthNetwork.getDeviceTokenApi().sendToken(DeviceTokenDto(token = token ?: ""))
-//        }
-
-//        Log.d(TAG, "sendRegistrationTokenToServer($token)")
+        val preferences = application.getSharedPreferences(
+            APP_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+        preferences.edit().putString(DEVICE_TOKEN, token).apply()
     }
 
     /**
@@ -152,7 +151,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     companion object {
-
         private const val TAG = "MyFirebaseMsgService"
+        const val APP_PREFERENCES = "preferences_settings"
+        const val DEVICE_TOKEN = "device_token_status"
     }
 }
