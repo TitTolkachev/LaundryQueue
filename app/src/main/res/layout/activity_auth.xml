@@ -80,6 +80,7 @@
         android:paddingHorizontal="48dp"
         android:paddingVertical="14dp"
         android:text="Sign In"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

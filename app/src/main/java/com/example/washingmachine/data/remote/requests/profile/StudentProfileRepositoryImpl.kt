@@ -25,7 +25,6 @@ class StudentProfileRepositoryImpl(useCases: AuthNetworkUseCases) : StudentProfi
                         StudentInfo(
                             request.body()?.id,
                             request.body()?.dormitoryId,
-                            request.body()?.studentNumber,
                             request.body()?.email,
                             request.body()?.name,
                             request.body()?.surname,
@@ -37,6 +36,7 @@ class StudentProfileRepositoryImpl(useCases: AuthNetworkUseCases) : StudentProfi
                     Resource.NetworkError(request.message())
                 }
             } catch (e: Exception) {
+
                 Resource.Exception(e)
             }
         }
@@ -54,7 +54,6 @@ class StudentProfileRepositoryImpl(useCases: AuthNetworkUseCases) : StudentProfi
                         body.email,
                         body.name,
                         body.surname,
-                        body.studentNumber,
                         body.room,
                         body.dormitoryId,
                     )
@@ -64,7 +63,6 @@ class StudentProfileRepositoryImpl(useCases: AuthNetworkUseCases) : StudentProfi
                         StudentInfo(
                             request.body()?.id,
                             request.body()?.dormitoryId,
-                            request.body()?.studentNumber,
                             request.body()?.email,
                             request.body()?.name,
                             request.body()?.surname,

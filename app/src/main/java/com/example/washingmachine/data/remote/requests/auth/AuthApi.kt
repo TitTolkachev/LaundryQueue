@@ -12,6 +12,6 @@ interface AuthApi {
     @POST("api/login")
     suspend fun login(@Body body: LoginRequestDto): Response<LoginResponseDto>
 
-    @POST("api")
+    @POST("api/refresh")
     suspend fun refresh(@Body body: RefreshRequestDto): Response<LoginResponseDto>
 }
