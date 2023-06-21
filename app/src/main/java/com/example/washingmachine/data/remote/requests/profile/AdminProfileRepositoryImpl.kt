@@ -51,7 +51,8 @@ class AdminProfileRepositoryImpl(authNetwork: AuthNetwork) : AdminProfileReposit
                     AdminProfileRequestDto(
                         body.email,
                         body.name,
-                        body.surname
+                        body.surname,
+                        body.dormitoryId,
                     )
                 )
                 if (request.isSuccessful) {

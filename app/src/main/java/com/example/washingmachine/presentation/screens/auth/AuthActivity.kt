@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.washingmachine.databinding.ActivityAuthBinding
 import com.example.washingmachine.presentation.screens.admin.AdminActivity
+import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileActivity
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileActivity
 import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
 import com.example.washingmachine.presentation.screens.main.MainActivity
@@ -39,6 +40,15 @@ class AuthActivity : AppCompatActivity() {
         viewModel.navigateEditStudentProfile.observe(this) {
             if (it == true) {
                 val intent = Intent(this, EditStudentProfileActivity::class.java)
+                intent.putExtra("must_fill", true)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        viewModel.navigateEditPersonProfile.observe(this){
+            if (it == true) {
+                val intent = Intent(this, EditPersonProfileActivity::class.java)
                 intent.putExtra("must_fill", true)
                 startActivity(intent)
                 finish()

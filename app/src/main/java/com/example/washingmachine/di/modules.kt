@@ -14,13 +14,17 @@ import com.example.washingmachine.data.remote.requests.auth.AuthLogoutRepository
 import com.example.washingmachine.data.remote.requests.auth.AuthRepositoryImpl
 import com.example.washingmachine.data.remote.requests.balance.BalanceRepositoryIml
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenRepositoryImpl
+import com.example.washingmachine.data.remote.requests.dormitory.DormitoryRepositoryImpl
+import com.example.washingmachine.data.remote.requests.machines.MachinesRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileRepositoryImpl
+import com.example.washingmachine.data.remote.requests.queue.QueueRepositoryImpl
 import com.example.washingmachine.domain.repository.AdminProfileRepository
 import com.example.washingmachine.domain.repository.AuthLogoutRepository
 import com.example.washingmachine.domain.repository.AuthRepository
 import com.example.washingmachine.domain.repository.BalanceRepository
 import com.example.washingmachine.domain.repository.DeviceTokenRepository
+import com.example.washingmachine.domain.repository.DormitoryRepository
 import com.example.washingmachine.domain.repository.EnterRepository
 import com.example.washingmachine.domain.repository.MachinesRepository
 import com.example.washingmachine.domain.repository.QueueRepository
@@ -53,6 +57,8 @@ import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileViewModel
+import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
@@ -130,7 +136,7 @@ val storage = module {
 
 
 val viewModels = module {
-    viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { AdminViewModel() }
@@ -140,5 +146,6 @@ val viewModels = module {
     viewModel { EmployeeViewModel() }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
+    viewModel { EditPersonProfileViewModel(get(), get(), get()) }
 
 }

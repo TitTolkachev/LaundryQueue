@@ -10,6 +10,7 @@ import com.example.washingmachine.domain.model.Roles
 import com.example.washingmachine.domain.model.Token
 import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
+import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.GetStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.SendDeviceTokenUseCase
 import com.example.washingmachine.domain.usecase.remote.SignInUseCase
@@ -21,7 +22,8 @@ class AuthViewModel(
     private val saveTokenToLocalStorageUseCase: SaveTokenToLocalStorageUseCase,
     private val sendDeviceTokenUseCase: SendDeviceTokenUseCase,
     setFirstEnterPassedUseCase: SetFirstEnterPassedUseCase,
-    private val getStudentProfileUseCase: GetStudentProfileUseCase
+    private val getStudentProfileUseCase: GetStudentProfileUseCase,
+    private val getAdminProfileUseCase: GetAdminProfileUseCase
 ) : ViewModel() {
 
     private val _navigateToMain = MutableLiveData(false)
@@ -29,6 +31,9 @@ class AuthViewModel(
 
     private val _navigateEditStudentProfile = MutableLiveData(false)
     val navigateEditStudentProfile: LiveData<Boolean> = _navigateEditStudentProfile
+
+    private val _navigateEditPersonProfile = MutableLiveData(false)
+    val navigateEditPersonProfile: LiveData<Boolean> = _navigateEditPersonProfile
 
     private val _navigateToAdmin = MutableLiveData(false)
     val navigateToAdmin: LiveData<Boolean> = _navigateToAdmin
@@ -88,28 +93,42 @@ class AuthViewModel(
                                 is Resource.Success -> {
                                     if (data.data?.name.isNullOrBlank()) {
                                         _navigateEditStudentProfile.postValue(true)
-
-
-
-
                                     } else {
                                         _navigateToMain.postValue(true)
                                     }
                                 }
 
-                                else -> {
-
-                                }
-
+                                else -> {}
                             }
                         }
 
                         Roles.ROLE_EMPLOYEE -> {
-                            _navigateToEmployee.postValue(true)
+                            when (val data = getAdminProfileUseCase.execute()) {
+                                is Resource.Success -> {
+                                    if (data.data?.name.isNullOrBlank()) {
+                                        _navigateEditPersonProfile.postValue(true)
+                                    } else {
+                                        _navigateToEmployee.postValue(true)
+                                    }
+                                }
+
+                                else -> {}
+                            }
+
                         }
 
                         Roles.ROLE_ADMIN -> {
-                            _navigateToAdmin.postValue(true)
+                            when (val data = getAdminProfileUseCase.execute()) {
+                                is Resource.Success -> {
+                                    if (data.data?.name.isNullOrBlank()) {
+                                        _navigateEditPersonProfile.postValue(true)
+                                    } else {
+                                        _navigateToAdmin.postValue(true)
+                                    }
+                                }
+
+                                else -> {}
+                            }
                         }
                     }
                 }
