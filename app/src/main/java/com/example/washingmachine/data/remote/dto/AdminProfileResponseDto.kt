@@ -10,5 +10,6 @@ data class AdminProfileResponseDto(
     val surname: String?,
     val money: Double?,
     val role: String?,
-    val dormitoryId: String?
+    val dormitoryDto: DormitoryDto?,
+
 )

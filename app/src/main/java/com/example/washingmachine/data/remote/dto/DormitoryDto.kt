@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DormitoryDto(
-    val id: String = "",
-    val number: Int = 0
+    val id: String? = null ,
+    val number: Int? = null
 )

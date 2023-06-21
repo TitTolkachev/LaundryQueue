@@ -36,7 +36,7 @@ class StudentProfileActivity : AppCompatActivity() {
         }
 
         viewModel.getNavigationToAuthLiveData().observe(this) {
-            if (it) {
+            if (it == true) {
                 val intent = Intent(this, AuthActivity::class.java)
                 intent.addFlags(
                     Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -55,8 +55,7 @@ class StudentProfileActivity : AppCompatActivity() {
             binding.studentSurname.text = data.surname
             binding.studentRoom.text = data.room
 
-            binding.studentDormitory.text = viewModel.getDormitories()
-                .firstOrNull { it.id == data.dormitoryId }?.number.toString()
+            binding.studentDormitory.text = data.dormitory?.number.toString() + " dormitory"
         }
     }
 

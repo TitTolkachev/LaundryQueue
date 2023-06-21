@@ -1,12 +1,15 @@
 package com.example.washingmachine.presentation.screens.editprofile.student
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.washingmachine.data.remote.dto.DormitoryDto
 import com.example.washingmachine.databinding.ActivityStudentEditBinding
+import com.example.washingmachine.presentation.screens.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
@@ -14,17 +17,19 @@ class EditStudentProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentEditBinding
     private lateinit var viewModel: EditStudentProfileViewModel
 
-    var selectedDormitory = "1"
+    private var selectedDormitory: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
         viewModel.getCurrentData()
 
-        viewModel.setWorkingType(((intent.extras?.getString("must_fill") ?: false) as Boolean))
+        viewModel.setWorkingType((intent.extras?.getBoolean("must_fill") ?: false))
 
         binding = ActivityStudentEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         binding.studentSaveChangesButton.setOnClickListener {
             viewModel.save(
@@ -33,6 +38,7 @@ class EditStudentProfileActivity : AppCompatActivity() {
                 binding.studentChangeSurname.text.toString(),
                 binding.studentChangeRoom.text.toString(),
                 viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
+                    ?: ""
             )
         }
 
@@ -41,8 +47,7 @@ class EditStudentProfileActivity : AppCompatActivity() {
             binding.studentChangeName.setText(data.name.toString())
             binding.studentChangeSurname.setText(data.surname.toString())
             binding.studentChangeRoom.setText(data.room.toString())
-            selectedDormitory =
-                viewModel.dormitories.firstOrNull { it.id == data.dormitoryId }?.number.toString()
+            selectedDormitory = data.dormitory?.number.toString()
         }
 
         viewModel.getDormitoriesLiveData().observe(this) {
@@ -73,6 +78,20 @@ class EditStudentProfileActivity : AppCompatActivity() {
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
             binding.dormitoryList.onItemSelectedListener = itemSelectedListener
+        }
+
+        viewModel.getNavigateToMainScreenLiveData().observe(this) {
+            if (it == true) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        viewModel.getNavigateToProfileScreenLiveData().observe(this) {
+            if (it == true) {
+                finish()
+            }
         }
     }
 

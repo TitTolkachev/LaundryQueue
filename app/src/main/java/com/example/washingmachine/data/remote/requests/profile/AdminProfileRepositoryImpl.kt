@@ -5,7 +5,6 @@ import com.example.washingmachine.data.remote.dto.AdminProfileRequestDto
 import com.example.washingmachine.domain.model.AdminEditRequestBody
 import com.example.washingmachine.domain.model.AdminInfo
 import com.example.washingmachine.domain.repository.AdminProfileRepository
-import com.example.washingmachine.domain.usecase.group.AuthNetworkUseCases
 import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,7 +28,7 @@ class AdminProfileRepositoryImpl(authNetwork: AuthNetwork) : AdminProfileReposit
                             request.body()?.surname,
                             request.body()?.money,
                             request.body()?.role,
-                            request.body()?.dormitoryId
+                            request.body()?.dormitoryDto
                         )
                     )
                 } else {
@@ -64,7 +63,7 @@ class AdminProfileRepositoryImpl(authNetwork: AuthNetwork) : AdminProfileReposit
                             request.body()?.surname,
                             request.body()?.money,
                             request.body()?.role,
-                            request.body()?.dormitoryId
+                            request.body()?.dormitoryDto
                         )
                     )
                 } else {

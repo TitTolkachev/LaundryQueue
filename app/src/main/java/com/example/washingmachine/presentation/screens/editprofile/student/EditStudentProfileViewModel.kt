@@ -1,5 +1,6 @@
 package com.example.washingmachine.presentation.screens.editprofile.student
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,17 +24,26 @@ class EditStudentProfileViewModel(
     private val liveData = MutableLiveData(StudentInfo())
     private val dormitoriesLiveData = MutableLiveData(listOf(DormitoryDto()))
 
+    private val navigateToMainScreen = MutableLiveData(false)
+
+    private val navigateToProfileScreen = MutableLiveData(false)
+
     private var mustFillAllFields = false
 
     var dormitories = listOf<DormitoryDto>()
 
     fun setWorkingType(mustFillAllFields: Boolean) {
         this.mustFillAllFields = mustFillAllFields
+        Log.d("!!!!", mustFillAllFields.toString())
     }
 
     fun getProfileLiveData(): LiveData<StudentInfo> = liveData
 
     fun getDormitoriesLiveData(): LiveData<List<DormitoryDto>> = dormitoriesLiveData
+
+    fun getNavigateToMainScreenLiveData(): LiveData<Boolean> = navigateToMainScreen
+
+    fun getNavigateToProfileScreenLiveData(): LiveData<Boolean> = navigateToProfileScreen
 
     fun getCurrentData() {
         viewModelScope.launch {
@@ -83,6 +93,7 @@ class EditStudentProfileViewModel(
                         )
                     )) {
                         is Resource.Success -> {
+                            navigateToMainScreen.postValue(true)
                         }
 
                         else -> {
@@ -95,14 +106,15 @@ class EditStudentProfileViewModel(
             viewModelScope.launch {
                 when (editStudentProfileUseCase.execute(
                     StudentEditRequestBody(
-                        email ?: liveData.value?.email,
-                        name ?: liveData.value?.name ?: "",
-                        surname ?: liveData.value?.surname ?: "",
-                        room ?: liveData.value?.room ?: "",
-                        dormitoryId ?: liveData.value?.dormitoryId ?: ""
+                        if (!email.isNullOrBlank()) email else liveData.value?.email,
+                        if (!name.isNullOrBlank()) name else "null",
+                        if (!surname.isNullOrBlank()) surname else "null",
+                        if (!room.isNullOrBlank()) room else "null",
+                        dormitoryId ?: "null"
                     )
                 )) {
                     is Resource.Success -> {
+                        navigateToProfileScreen.postValue(true)
                     }
 
                     else -> {

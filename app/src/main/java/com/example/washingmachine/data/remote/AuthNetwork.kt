@@ -19,7 +19,7 @@ class AuthNetwork(
     private val tokenAuthenticator: TokenAuthenticator,
 ) {
 
-    private val BASE_URL = "http://kosterror.ru:8080/"
+    private val BASE_URL = "http://95.142.46.40:8080/"
 
     private val json = Json {
         ignoreUnknownKeys = true

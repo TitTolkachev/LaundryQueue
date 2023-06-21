@@ -1,5 +1,7 @@
 package com.example.washingmachine.domain.model
 
+import com.example.washingmachine.data.remote.dto.DormitoryDto
+
 data class AdminInfo(
     val id: String? = null,
     val email: String? = null,
@@ -7,5 +9,5 @@ data class AdminInfo(
     val surname: String? = null,
     val money: Double? = null,
     val role: String? = null,
-    val dormitoryId: String? = null
+    val dormitory: DormitoryDto? = null
 )

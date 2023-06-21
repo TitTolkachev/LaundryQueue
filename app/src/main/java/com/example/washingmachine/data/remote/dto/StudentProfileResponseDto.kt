@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StudentProfileResponseDto(
     val id: String?,
-    val dormitoryId: String?,
+    val dormitory: DormitoryDto?,
     val email: String?,
     val name: String?,
     val surname: String?,
