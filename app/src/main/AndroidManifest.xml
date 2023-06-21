@@ -41,6 +41,9 @@
         <activity
             android:name=".presentation.screens.editprofile.person.EditPersonProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.screens.studentqueue.StudentQueueTicketsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

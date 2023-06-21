@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
         android:scrollbars="none"
@@ -66,16 +67,18 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView5"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:isScrollContainer="false"
-                android:nestedScrollingEnabled="false"
+                android:nestedScrollingEnabled="true"
+                android:orientation="vertical"
                 android:overScrollMode="never"
                 android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
                 app:layout_constraintTop_toBottomOf="@+id/textView11"
-                tools:itemCount="5"
+                tools:itemCount="6"
                 tools:listitem="@layout/item_queue_not_available_slot" />
 
             <androidx.constraintlayout.widget.Guideline

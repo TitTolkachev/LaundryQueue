@@ -1,6 +1,5 @@
 package com.example.washingmachine.presentation.screens.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.washingmachine.domain.model.DeviceToken
 import com.example.washingmachine.domain.model.Roles
 import com.example.washingmachine.domain.model.Token
+import com.example.washingmachine.domain.usecase.local.SaveStudentIdToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
 import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
@@ -23,7 +23,8 @@ class AuthViewModel(
     private val sendDeviceTokenUseCase: SendDeviceTokenUseCase,
     setFirstEnterPassedUseCase: SetFirstEnterPassedUseCase,
     private val getStudentProfileUseCase: GetStudentProfileUseCase,
-    private val getAdminProfileUseCase: GetAdminProfileUseCase
+    private val getAdminProfileUseCase: GetAdminProfileUseCase,
+    private val saveStudentIdToLocalStorageUseCase: SaveStudentIdToLocalStorageUseCase
 ) : ViewModel() {
 
     private val _navigateToMain = MutableLiveData(false)
@@ -91,6 +92,7 @@ class AuthViewModel(
                         Roles.ROLE_STUDENT -> {
                             when (val data = getStudentProfileUseCase.execute()) {
                                 is Resource.Success -> {
+                                    saveStudentIdToLocalStorageUseCase.execute(data.data?.id ?: "")
                                     if (data.data?.name.isNullOrBlank()) {
                                         _navigateEditStudentProfile.postValue(true)
                                     } else {

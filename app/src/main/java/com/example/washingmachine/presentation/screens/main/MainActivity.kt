@@ -11,6 +11,7 @@ import com.example.washingmachine.presentation.screens.main.adapters.MachineCard
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
 import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileActivity
+import com.example.washingmachine.presentation.screens.studentqueue.StudentQueueTicketsActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         initRecyclerViews()
         binding.goToStudentProfile.setOnClickListener {
             openStudentProfile()
+        }
+
+        binding.myQueueTickets.setOnClickListener {
+            val intent = Intent(this, StudentQueueTicketsActivity::class.java)
+            startActivity(intent)
         }
     }
 
