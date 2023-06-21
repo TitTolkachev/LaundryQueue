@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.screens.addmachine.AddMachineActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.screens.addemployee.AddEmployeeActivity"
             android:exported="false" />
         <activity

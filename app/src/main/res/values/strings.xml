@@ -45,4 +45,17 @@
     <string name="alert_dialog_error_text">Error data loading</string>
     <string name="alert_dialog_yes_btn_text">Yes</string>
     <string name="alert_dialog_no_btn_text">No</string>
+
+    <!-- Machine Types -->
+    <string-array name="machine_types">
+        <item>WASHING_MACHINE</item>
+        <item>DRYING_MACHINE</item>
+    </string-array>
+
+    <!-- Machine Status -->
+    <string-array name="machine_status">
+        <item>UNAVAILABLE</item>
+        <item>WORKING</item>
+        <item>READY_TO_WORK</item>
+    </string-array>
 </resources>

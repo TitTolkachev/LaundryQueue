@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityAdminMachinesBinding
+import com.example.washingmachine.presentation.screens.addmachine.AddMachineActivity
 import com.example.washingmachine.presentation.screens.adminmachines.adapters.AdminMachineCardActionListener
 import com.example.washingmachine.presentation.screens.adminmachines.adapters.AdminMachinesAdapter
 import com.example.washingmachine.presentation.screens.adminmachines.model.AdminMachineCard
@@ -20,6 +21,11 @@ class AdminMachinesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminMachinesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.button7.setOnClickListener {
+            val intent = Intent(this, AddMachineActivity::class.java)
+            startActivity(intent)
+        }
 
         initRecyclerViews()
     }

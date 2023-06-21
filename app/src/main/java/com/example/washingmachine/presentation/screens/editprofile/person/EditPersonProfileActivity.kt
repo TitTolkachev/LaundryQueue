@@ -10,11 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.washingmachine.databinding.ActivityPersonEditProfileBinding
 import com.example.washingmachine.domain.model.Roles
 import com.example.washingmachine.presentation.screens.admin.AdminActivity
-import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
-import com.example.washingmachine.presentation.screens.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class EditPersonProfileActivity: AppCompatActivity() {
+class EditPersonProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPersonEditProfileBinding
     private lateinit var viewModel: EditPersonProfileViewModel
 
@@ -83,7 +81,7 @@ class EditPersonProfileActivity: AppCompatActivity() {
 
             if (it == true) {
 
-                val intent: Intent = when (viewModel.getProfileLiveData().value?.role){
+                val intent: Intent = when (viewModel.getProfileLiveData().value?.role) {
                     Roles.ROLE_ADMIN.name -> {
                         Intent(this, AdminActivity::class.java)
                     }
