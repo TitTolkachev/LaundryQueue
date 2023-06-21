@@ -7,7 +7,7 @@ data class AdminInfo(
     val email: String? = null,
     val name: String? = null,
     val surname: String? = null,
-    val money: Double? = null,
+    val money: Int? = null,
     val role: String? = null,
     val dormitory: DormitoryDto? = null
 )

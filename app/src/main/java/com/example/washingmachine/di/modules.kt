@@ -3,6 +3,9 @@ package com.example.washingmachine.di
 import com.example.washingmachine.data.local.prefs.enter.EnterRepositoryImpl
 import com.example.washingmachine.data.local.prefs.enter.EnterStorage
 import com.example.washingmachine.data.local.prefs.enter.EnterStorageImpl
+import com.example.washingmachine.data.local.prefs.studentid.StudentIdRepositoryImpl
+import com.example.washingmachine.data.local.prefs.studentid.StudentIdStorage
+import com.example.washingmachine.data.local.prefs.studentid.StudentIdStorageImpl
 import com.example.washingmachine.data.local.prefs.token.TokenRepositoryImpl
 import com.example.washingmachine.data.local.prefs.token.TokenStorage
 import com.example.washingmachine.data.local.prefs.token.TokenStorageImpl
@@ -29,12 +32,15 @@ import com.example.washingmachine.domain.repository.DormitoryRepository
 import com.example.washingmachine.domain.repository.EnterRepository
 import com.example.washingmachine.domain.repository.MachinesRepository
 import com.example.washingmachine.domain.repository.QueueRepository
+import com.example.washingmachine.domain.repository.StudentIdRepository
 import com.example.washingmachine.domain.repository.StudentProfileRepository
 import com.example.washingmachine.domain.repository.TokenRepository
 import com.example.washingmachine.domain.repository.UsersCreateRepository
 import com.example.washingmachine.domain.usecase.local.ClearLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.GetFirstEnterStatusUseCase
+import com.example.washingmachine.domain.usecase.local.GetStudentIdFromLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
+import com.example.washingmachine.domain.usecase.local.SaveStudentIdToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
 import com.example.washingmachine.domain.usecase.remote.BookSlotUseCase
@@ -62,12 +68,14 @@ import com.example.washingmachine.presentation.screens.addemployee.AddEmployeeVi
 import com.example.washingmachine.presentation.screens.addstudent.AddStudentViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileViewModel
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
 import com.example.washingmachine.presentation.screens.queue.QueueViewModel
 import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
+import com.example.washingmachine.presentation.screens.studentqueue.StudentQueueTicketsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -119,12 +127,15 @@ val localUseCases = module {
     factory { SaveTokenToLocalStorageUseCase(get()) }
     factory { SetFirstEnterPassedUseCase(get()) }
     factory { ClearLocalStorageUseCase(get()) }
+    factory { SaveStudentIdToLocalStorageUseCase(get()) }
+    factory { GetStudentIdFromLocalStorageUseCase(get()) }
 }
 
 
 val repositories = module {
     factory<EnterRepository> { EnterRepositoryImpl(get()) }
     factory<TokenRepository> { TokenRepositoryImpl(get()) }
+    factory<StudentIdRepository> { StudentIdRepositoryImpl(get()) }
 
     factory<AuthRepository> { AuthRepositoryImpl(get()) }
     factory<AuthLogoutRepository> { AuthLogoutRepositoryImpl(get()) }
@@ -142,11 +153,12 @@ val repositories = module {
 val storage = module {
     single<TokenStorage> { TokenStorageImpl(androidContext()) }
     single<EnterStorage> { EnterStorageImpl(androidContext()) }
+    single<StudentIdStorage> { StudentIdStorageImpl(androidContext()) }
 }
 
 
 val viewModels = module {
-    viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get(), get()) }
     viewModel { QueueViewModel(get(), get(), get(), get()) }
@@ -158,5 +170,7 @@ val viewModels = module {
     viewModel { AddEmployeeViewModel(get()) }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
+    viewModel { EditPersonProfileViewModel(get(), get(), get()) }
+    viewModel { StudentQueueTicketsViewModel(get(), get(), get(), get()) }
 
 }

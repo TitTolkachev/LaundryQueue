@@ -6,10 +6,12 @@ import kotlinx.serialization.Serializable
 data class AdminProfileResponseDto(
     val id: String?,
     val email: String?,
+    val dormitoryDto: DormitoryDto?,
     val name: String?,
     val surname: String?,
-    val money: Double?,
+    val money: Int?,
     val role: String?,
-    val dormitoryDto: DormitoryDto?,
+    val dormitoryId: String?,
 
-)
+
+    )

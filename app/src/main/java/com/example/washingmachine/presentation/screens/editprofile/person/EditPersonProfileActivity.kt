@@ -1,4 +1,4 @@
-package com.example.washingmachine.presentation.screens.editprofile.student
+package com.example.washingmachine.presentation.screens.editprofile.person
 
 import android.R
 import android.content.Intent
@@ -7,15 +7,16 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.example.washingmachine.data.remote.dto.DormitoryDto
-import com.example.washingmachine.databinding.ActivityStudentEditProfileBinding
+import com.example.washingmachine.databinding.ActivityPersonEditProfileBinding
+import com.example.washingmachine.domain.model.Roles
+import com.example.washingmachine.presentation.screens.admin.AdminActivity
+import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-
-class EditStudentProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityStudentEditProfileBinding
-    private lateinit var viewModel: EditStudentProfileViewModel
+class EditPersonProfileActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityPersonEditProfileBinding
+    private lateinit var viewModel: EditPersonProfileViewModel
 
     private var selectedDormitory: String? = null
 
@@ -26,27 +27,25 @@ class EditStudentProfileActivity : AppCompatActivity() {
 
         viewModel.setWorkingType((intent.extras?.getBoolean("must_fill") ?: false))
 
-        binding = ActivityStudentEditProfileBinding.inflate(layoutInflater)
+        binding = ActivityPersonEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
 
-        binding.studentSaveChangesButton.setOnClickListener {
+        binding.personSaveChangesButton.setOnClickListener {
             viewModel.save(
-                binding.studentChangeEmail.text.toString(),
-                binding.studentChangeName.text.toString(),
-                binding.studentChangeSurname.text.toString(),
-                binding.studentChangeRoom.text.toString(),
+                binding.personChangeEmail.text.toString(),
+                binding.personChangeName.text.toString(),
+                binding.personChangeSurname.text.toString(),
                 viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
                     ?: ""
             )
         }
 
         viewModel.getProfileLiveData().observe(this) { data ->
-            binding.studentChangeEmail.setText(data.email.toString())
-            binding.studentChangeName.setText(data.name.toString())
-            binding.studentChangeSurname.setText(data.surname.toString())
-            binding.studentChangeRoom.setText(data.room.toString())
+            binding.personChangeEmail.setText(data.email.toString())
+            binding.personChangeName.setText(data.name.toString())
+            binding.personChangeSurname.setText(data.surname.toString())
             selectedDormitory = data.dormitory?.number.toString()
         }
 
@@ -81,8 +80,20 @@ class EditStudentProfileActivity : AppCompatActivity() {
         }
 
         viewModel.getNavigateToMainScreenLiveData().observe(this) {
+
             if (it == true) {
-                val intent = Intent(this, MainActivity::class.java)
+
+                val intent: Intent = when (viewModel.getProfileLiveData().value?.role){
+                    Roles.ROLE_ADMIN.name -> {
+                        Intent(this, AdminActivity::class.java)
+                    }
+
+                    else -> {
+                        // TODO(EMPLOYEE ACTIVITY)
+                        Intent(this, AdminActivity::class.java)
+                    }
+                }
+
                 startActivity(intent)
                 finish()
             }
@@ -94,5 +105,4 @@ class EditStudentProfileActivity : AppCompatActivity() {
             }
         }
     }
-
 }
