@@ -29,6 +29,7 @@
 
     <!-- Alert Text -->
     <string name="alert_text_intent_for_queue_booking">Are you sure you want to take a queue?</string>
+    <string name="alert_text_intent_for_slot_checkout">Do you want to check out?</string>
     <string name="alert_text_default">Lol Lol Text Text Lol Lol Text Text Lol Lol Text Text</string>
 
     <!-- Snackbar Text -->

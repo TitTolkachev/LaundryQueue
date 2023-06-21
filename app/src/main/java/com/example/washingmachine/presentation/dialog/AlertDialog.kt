@@ -21,7 +21,7 @@ class AlertDialog : DialogFragment() {
     }
 
     interface IAlertDialogListener {
-        fun alertDialogRetry()
+        fun alertDialogRetry(alertType: AlertType)
         fun onAlertDialogDismiss()
     }
 
@@ -61,7 +61,7 @@ class AlertDialog : DialogFragment() {
                 }
                 binding.alertDialogRetryBtn.setOnClickListener {
                     dialog?.dismiss()
-                    dialogListener?.alertDialogRetry()
+                    dialogListener?.alertDialogRetry(alert)
                 }
             }
 
@@ -136,13 +136,15 @@ class AlertDialog : DialogFragment() {
     private fun getAlertMessage(alert: AlertType): String {
         return when (alert) {
             AlertType.INTENT_FOR_QUEUE_BOOKING -> getString(R.string.alert_text_intent_for_queue_booking)
+            AlertType.INTENT_FOR_SLOT_CHECKOUT -> getString(R.string.alert_text_intent_for_slot_checkout)
             AlertType.DEFAULT -> getString(R.string.alert_text_default)
         }
     }
 
     private fun getAlertType(alert: AlertType): AlertDisplayType {
         return when (alert) {
-            AlertType.INTENT_FOR_QUEUE_BOOKING -> AlertDisplayType.SERVER_ERROR
+            AlertType.INTENT_FOR_QUEUE_BOOKING -> AlertDisplayType.YES_NO
+            AlertType.INTENT_FOR_SLOT_CHECKOUT -> AlertDisplayType.YES_NO
             AlertType.DEFAULT -> AlertDisplayType.INFO_ONE
         }
     }
