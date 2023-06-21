@@ -14,14 +14,18 @@ import com.example.washingmachine.data.remote.requests.auth.AuthLogoutRepository
 import com.example.washingmachine.data.remote.requests.auth.AuthRepositoryImpl
 import com.example.washingmachine.data.remote.requests.balance.BalanceRepositoryIml
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenRepositoryImpl
+import com.example.washingmachine.data.remote.requests.machines.MachinesRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileRepositoryImpl
+import com.example.washingmachine.data.remote.requests.queue.QueueRepositoryImpl
 import com.example.washingmachine.domain.repository.AdminProfileRepository
 import com.example.washingmachine.domain.repository.AuthLogoutRepository
 import com.example.washingmachine.domain.repository.AuthRepository
 import com.example.washingmachine.domain.repository.BalanceRepository
 import com.example.washingmachine.domain.repository.DeviceTokenRepository
 import com.example.washingmachine.domain.repository.EnterRepository
+import com.example.washingmachine.domain.repository.MachinesRepository
+import com.example.washingmachine.domain.repository.QueueRepository
 import com.example.washingmachine.domain.repository.StudentProfileRepository
 import com.example.washingmachine.domain.repository.TokenRepository
 import com.example.washingmachine.domain.usecase.local.ClearLocalStorageUseCase
@@ -29,14 +33,22 @@ import com.example.washingmachine.domain.usecase.local.GetFirstEnterStatusUseCas
 import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SaveTokenToLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCase
+import com.example.washingmachine.domain.usecase.remote.BookSlotUseCase
+import com.example.washingmachine.domain.usecase.remote.ChangeMachineStatusUseCase
+import com.example.washingmachine.domain.usecase.remote.CheckOutQueueUseCase
+import com.example.washingmachine.domain.usecase.remote.CreateMachineUseCase
+import com.example.washingmachine.domain.usecase.remote.DeleteMachineUseCase
 import com.example.washingmachine.domain.usecase.remote.EditAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.EditStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
+import com.example.washingmachine.domain.usecase.remote.GetMachineQueueUseCase
+import com.example.washingmachine.domain.usecase.remote.GetMachinesUseCase
 import com.example.washingmachine.domain.usecase.remote.GetStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.LogoutUseCase
 import com.example.washingmachine.domain.usecase.remote.RefreshTokenUseCase
 import com.example.washingmachine.domain.usecase.remote.SendDeviceTokenUseCase
 import com.example.washingmachine.domain.usecase.remote.SignInUseCase
+import com.example.washingmachine.domain.usecase.remote.StartMachineUseCase
 import com.example.washingmachine.domain.usecase.remote.TakeOutBalanceUseCase
 import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
@@ -72,6 +84,18 @@ val remoteUseCases = module {
     factory { SignInUseCase(get()) }
     factory { TakeOutBalanceUseCase(get()) }
     factory { TopUpBalanceUseCase(get()) }
+
+    // Machines
+    factory { ChangeMachineStatusUseCase(get()) }
+    factory { CreateMachineUseCase(get()) }
+    factory { DeleteMachineUseCase(get()) }
+    factory { GetMachinesUseCase(get()) }
+
+    // Queue
+    factory { BookSlotUseCase(get()) }
+    factory { CheckOutQueueUseCase(get()) }
+    factory { GetMachineQueueUseCase(get()) }
+    factory { StartMachineUseCase(get()) }
 }
 
 val localUseCases = module {
@@ -93,6 +117,8 @@ val repositories = module {
     factory<DeviceTokenRepository> { DeviceTokenRepositoryImpl(get()) }
     factory<AdminProfileRepository> { AdminProfileRepositoryImpl(get()) }
     factory<StudentProfileRepository> { StudentProfileRepositoryImpl(get()) }
+    factory<MachinesRepository> { MachinesRepositoryImpl(get()) }
+    factory<QueueRepository> { QueueRepositoryImpl(get()) }
 
 }
 

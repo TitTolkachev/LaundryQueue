@@ -28,7 +28,11 @@
     <string name="alert_dialog_data_text">alertDialogText</string>
 
     <!-- Alert Text -->
+    <string name="alert_text_intent_for_queue_booking">Are you sure you want to take a queue?</string>
     <string name="alert_text_default">Lol Lol Text Text Lol Lol Text Text Lol Lol Text Text</string>
+
+    <!-- Snackbar Text -->
+    <string name="alert_text_not_enough_money">You do not have enough money for this action</string>
 
     <!-- Alert Buttons Text -->
     <string name="alert_button_text_ok">OK</string>
@@ -37,4 +41,6 @@
     <string name="alert_dialog_retry_btn_text">Retry</string>
     <string name="alert_dialog_exit_btn_text">Exit</string>
     <string name="alert_dialog_error_text">Error data loading</string>
+    <string name="alert_dialog_yes_btn_text">Yes</string>
+    <string name="alert_dialog_no_btn_text">No</string>
 </resources>

@@ -52,6 +52,19 @@ class AlertDialog : DialogFragment() {
         binding.textView8.text = getAlertMessage(alert)
 
         when (getAlertType(alert)) {
+            AlertDisplayType.YES_NO -> {
+                binding.imageView4.setImageResource(R.drawable.icon_admin_machines_coin)
+                binding.alertDialogExitBtn.text = getString(R.string.alert_dialog_no_btn_text)
+                binding.alertDialogRetryBtn.text = getString(R.string.alert_dialog_yes_btn_text)
+                binding.alertDialogExitBtn.setOnClickListener {
+                    dialog?.dismiss()
+                }
+                binding.alertDialogRetryBtn.setOnClickListener {
+                    dialog?.dismiss()
+                    dialogListener?.alertDialogRetry()
+                }
+            }
+
             AlertDisplayType.VALIDATION -> {
 //                binding.imageView4.setImageResource(R.drawable.error_icon_1)
 //                binding.alertDialogExitBtn.visibility = View.GONE
@@ -63,7 +76,7 @@ class AlertDialog : DialogFragment() {
             }
 
             AlertDisplayType.INFO_ONE -> {
-                binding.imageView4.setImageResource(R.drawable.image_wm_1)
+                binding.imageView4.setImageResource(R.drawable.icon_admin_machines_coin)
                 binding.alertDialogExitBtn.visibility = View.GONE
                 binding.alertDialogRetryBtn.text = getString(R.string.alert_button_text_lol)
                 binding.alertDialogRetryBtn.setOnClickListener {
@@ -122,12 +135,14 @@ class AlertDialog : DialogFragment() {
 
     private fun getAlertMessage(alert: AlertType): String {
         return when (alert) {
+            AlertType.INTENT_FOR_QUEUE_BOOKING -> getString(R.string.alert_text_intent_for_queue_booking)
             AlertType.DEFAULT -> getString(R.string.alert_text_default)
         }
     }
 
     private fun getAlertType(alert: AlertType): AlertDisplayType {
         return when (alert) {
+            AlertType.INTENT_FOR_QUEUE_BOOKING -> AlertDisplayType.SERVER_ERROR
             AlertType.DEFAULT -> AlertDisplayType.INFO_ONE
         }
     }
@@ -136,6 +151,7 @@ class AlertDialog : DialogFragment() {
         VALIDATION,
         SERVER_ERROR,
         INFO_ONE,
-        INFO_TWO
+        INFO_TWO,
+        YES_NO
     }
 }

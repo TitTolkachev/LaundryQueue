@@ -3,8 +3,10 @@ package com.example.washingmachine.data.remote
 import com.example.washingmachine.data.remote.requests.auth.AuthLogoutApi
 import com.example.washingmachine.data.remote.requests.balance.BalanceApi
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenApi
+import com.example.washingmachine.data.remote.requests.machines.MachinesApi
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
+import com.example.washingmachine.data.remote.requests.queue.QueueApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -19,7 +21,7 @@ class AuthNetwork(
     private val tokenAuthenticator: TokenAuthenticator,
 ) {
 
-    private val BASE_URL = "http://kosterror.ru:8080/"
+    private val BASE_URL = "http://95.142.46.40:8080/"
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -84,4 +86,8 @@ class AuthNetwork(
         getAuthRetrofit().create(AdminProfileApi::class.java)
 
     fun getBalanceApi(): BalanceApi = getAuthRetrofit().create(BalanceApi::class.java)
+
+    fun getQueueApi(): QueueApi = getAuthRetrofit().create(QueueApi::class.java)
+
+    fun getMachinesApi(): MachinesApi = getAuthRetrofit().create(MachinesApi::class.java)
 }

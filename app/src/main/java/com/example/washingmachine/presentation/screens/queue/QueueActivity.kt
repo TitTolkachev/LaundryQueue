@@ -1,5 +1,6 @@
 package com.example.washingmachine.presentation.screens.queue
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -89,17 +90,15 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
     }
 
     private fun onSlotCancelClicked(id: String) {
-        showAlertDialog(AlertType.DEFAULT)//viewModel.alertType.value ?: AlertType.DEFAULT)
+        showAlertDialog(AlertType.INTENT_FOR_QUEUE_BOOKING)//viewModel.alertType.value ?: AlertType.DEFAULT)
     }
 
     override fun alertDialogRetry() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAlertDialogDismiss() {
-        Snackbar.make(binding.root, "Hey you lost your 75 rubbles Mamont!!", Snackbar.LENGTH_LONG)
+        Snackbar.make(binding.root, "", Snackbar.LENGTH_LONG)
             .setAction("CLOSE") { }
-            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+            .setActionTextColor(Color.GREEN)
             .show()
     }
+
+    override fun onAlertDialogDismiss() {}
 }

@@ -1,9 +1,6 @@
 package com.example.washingmachine.data.remote
 
 import com.example.washingmachine.data.remote.requests.auth.AuthApi
-import com.example.washingmachine.data.remote.requests.balance.BalanceApi
-import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
-import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -11,12 +8,11 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class Network {
 
-    private val BASE_URL = "http://kosterror.ru:8080/"
+    private val BASE_URL = "http://95.142.46.40:8080/"
 
     private val json = Json {
         ignoreUnknownKeys = true
