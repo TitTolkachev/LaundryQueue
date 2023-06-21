@@ -1,12 +1,10 @@
 package com.example.washingmachine.data.remote.requests.profile
 
-import android.util.Log
 import com.example.washingmachine.data.remote.AuthNetwork
 import com.example.washingmachine.data.remote.dto.StudentProfileRequestDto
 import com.example.washingmachine.domain.model.StudentEditRequestBody
 import com.example.washingmachine.domain.model.StudentInfo
 import com.example.washingmachine.domain.repository.StudentProfileRepository
-import com.example.washingmachine.domain.usecase.group.AuthNetworkUseCases
 import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,7 +23,7 @@ class StudentProfileRepositoryImpl(authNetwork: AuthNetwork) : StudentProfileRep
                     Resource.Success(
                         StudentInfo(
                             request.body()?.id,
-                            request.body()?.dormitoryId,
+                            request.body()?.dormitory,
                             request.body()?.email,
                             request.body()?.name,
                             request.body()?.surname,
@@ -63,7 +61,7 @@ class StudentProfileRepositoryImpl(authNetwork: AuthNetwork) : StudentProfileRep
                     Resource.Success(
                         StudentInfo(
                             request.body()?.id,
-                            request.body()?.dormitoryId,
+                            request.body()?.dormitory,
                             request.body()?.email,
                             request.body()?.name,
                             request.body()?.surname,

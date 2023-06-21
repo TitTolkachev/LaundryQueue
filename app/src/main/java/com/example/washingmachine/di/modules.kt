@@ -14,10 +14,8 @@ import com.example.washingmachine.data.remote.requests.auth.AuthLogoutRepository
 import com.example.washingmachine.data.remote.requests.auth.AuthRepositoryImpl
 import com.example.washingmachine.data.remote.requests.balance.BalanceRepositoryIml
 import com.example.washingmachine.data.remote.requests.devicetoken.DeviceTokenRepositoryImpl
-import com.example.washingmachine.data.remote.requests.machines.MachinesRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileRepositoryImpl
-import com.example.washingmachine.data.remote.requests.queue.QueueRepositoryImpl
 import com.example.washingmachine.domain.repository.AdminProfileRepository
 import com.example.washingmachine.domain.repository.AuthLogoutRepository
 import com.example.washingmachine.domain.repository.AuthRepository
@@ -41,6 +39,7 @@ import com.example.washingmachine.domain.usecase.remote.DeleteMachineUseCase
 import com.example.washingmachine.domain.usecase.remote.EditAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.EditStudentProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
+import com.example.washingmachine.domain.usecase.remote.GetDormitoriesUseCase
 import com.example.washingmachine.domain.usecase.remote.GetMachineQueueUseCase
 import com.example.washingmachine.domain.usecase.remote.GetMachinesUseCase
 import com.example.washingmachine.domain.usecase.remote.GetStudentProfileUseCase
@@ -84,6 +83,7 @@ val remoteUseCases = module {
     factory { SignInUseCase(get()) }
     factory { TakeOutBalanceUseCase(get()) }
     factory { TopUpBalanceUseCase(get()) }
+    factory { GetDormitoriesUseCase(get()) }
 
     // Machines
     factory { ChangeMachineStatusUseCase(get()) }
@@ -120,6 +120,7 @@ val repositories = module {
     factory<MachinesRepository> { MachinesRepositoryImpl(get()) }
     factory<QueueRepository> { QueueRepositoryImpl(get()) }
 
+    factory<DormitoryRepository> { DormitoryRepositoryImpl(get()) }
 }
 
 val storage = module {
@@ -129,13 +130,15 @@ val storage = module {
 
 
 val viewModels = module {
-    viewModel { AuthViewModel(get(), get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { AdminViewModel() }
 
-    viewModel { StudentProfileViewModel(get(), get(), get(), get(), get()) }
-    viewModel { AdminProfileViewModel(get(), get(), get(), get()) }
+    viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { AdminProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { EmployeeViewModel() }
+
+    viewModel { EditStudentProfileViewModel(get(), get(), get()) }
 
 }

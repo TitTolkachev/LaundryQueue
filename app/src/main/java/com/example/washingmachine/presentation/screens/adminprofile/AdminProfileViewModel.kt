@@ -9,6 +9,7 @@ import com.example.washingmachine.domain.usecase.local.ClearLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.remote.GetAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.LogoutUseCase
+import com.example.washingmachine.domain.usecase.remote.TakeOutBalanceUseCase
 import com.example.washingmachine.domain.util.Resource
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,8 @@ class AdminProfileViewModel(
     private val getAdminProfileUseCase: GetAdminProfileUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getTokenFromLocalStorageUseCase: GetTokenFromLocalStorageUseCase,
-    private val clearLocalStorageUseCase: ClearLocalStorageUseCase
+    private val clearLocalStorageUseCase: ClearLocalStorageUseCase,
+    private val takeOutBalanceUseCase: TakeOutBalanceUseCase
 ) : ViewModel() {
 
     private val navigateToAuthLiveData = MutableLiveData(false)
@@ -47,6 +49,20 @@ class AdminProfileViewModel(
             when (val data = getAdminProfileUseCase.execute()) {
                 is Resource.Success -> {
                     profileLiveData.postValue(data.data)
+                }
+
+                else -> {
+
+                }
+            }
+        }
+    }
+
+    fun takeOutMoney(delta: Int) {
+        viewModelScope.launch {
+            when (val data = takeOutBalanceUseCase.execute(delta)) {
+                is Resource.Success -> {
+                    refreshData()
                 }
 
                 else -> {

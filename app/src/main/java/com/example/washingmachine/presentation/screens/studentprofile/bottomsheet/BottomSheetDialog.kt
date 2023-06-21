@@ -3,21 +3,17 @@ package com.example.washingmachine.presentation.screens.studentprofile.bottomshe
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.washingmachine.databinding.BottomSheetTopUpBalanceDialogBinding
-import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragment() {
+class BottomSheetDialog(private val balance: Int = 0, private val updateMoneyDelta: (Int) -> Unit) :
+    BottomSheetDialogFragment() {
 
     private lateinit var bottomSheetBinding: BottomSheetTopUpBalanceDialogBinding
-
-    private val viewModel: StudentProfileViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,8 +41,7 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
         }
 
         bottomSheetBinding.saveButton.setOnClickListener {
-            Log.d("!!!!", bottomSheetBinding.editTextNumberDecimal.text.toString())
-            viewModel.topUpBalance(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
+            updateMoneyDelta(bottomSheetBinding.editTextNumberDecimal.text.toString().toInt())
         }
 
         bottomSheetBinding.editTextNumberDecimal.setText(balance.toString())
@@ -75,5 +70,4 @@ class BottomSheetDialog(private val balance: Int = 0) : BottomSheetDialogFragmen
 
         return bottomSheetBinding.root
     }
-
 }
