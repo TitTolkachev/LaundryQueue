@@ -137,7 +137,7 @@ val storage = module {
 val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
     viewModel { AdminViewModel() }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
