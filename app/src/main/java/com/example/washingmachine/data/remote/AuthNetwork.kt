@@ -7,6 +7,7 @@ import com.example.washingmachine.data.remote.requests.machines.MachinesApi
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileApi
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileApi
 import com.example.washingmachine.data.remote.requests.queue.QueueApi
+import com.example.washingmachine.data.remote.requests.userscreate.UsersCreateApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -90,4 +91,6 @@ class AuthNetwork(
     fun getQueueApi(): QueueApi = getAuthRetrofit().create(QueueApi::class.java)
 
     fun getMachinesApi(): MachinesApi = getAuthRetrofit().create(MachinesApi::class.java)
+
+    fun getUsersCreateApi(): UsersCreateApi = getAuthRetrofit().create(UsersCreateApi::class.java)
 }

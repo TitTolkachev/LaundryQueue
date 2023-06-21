@@ -19,6 +19,7 @@ import com.example.washingmachine.data.remote.requests.machines.MachinesReposito
 import com.example.washingmachine.data.remote.requests.profile.AdminProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.profile.StudentProfileRepositoryImpl
 import com.example.washingmachine.data.remote.requests.queue.QueueRepositoryImpl
+import com.example.washingmachine.data.remote.requests.userscreate.UsersCreateRepositoryImpl
 import com.example.washingmachine.domain.repository.AdminProfileRepository
 import com.example.washingmachine.domain.repository.AuthLogoutRepository
 import com.example.washingmachine.domain.repository.AuthRepository
@@ -30,6 +31,7 @@ import com.example.washingmachine.domain.repository.MachinesRepository
 import com.example.washingmachine.domain.repository.QueueRepository
 import com.example.washingmachine.domain.repository.StudentProfileRepository
 import com.example.washingmachine.domain.repository.TokenRepository
+import com.example.washingmachine.domain.repository.UsersCreateRepository
 import com.example.washingmachine.domain.usecase.local.ClearLocalStorageUseCase
 import com.example.washingmachine.domain.usecase.local.GetFirstEnterStatusUseCase
 import com.example.washingmachine.domain.usecase.local.GetTokenFromLocalStorageUseCase
@@ -38,7 +40,9 @@ import com.example.washingmachine.domain.usecase.local.SetFirstEnterPassedUseCas
 import com.example.washingmachine.domain.usecase.remote.BookSlotUseCase
 import com.example.washingmachine.domain.usecase.remote.ChangeMachineStatusUseCase
 import com.example.washingmachine.domain.usecase.remote.CheckOutQueueUseCase
+import com.example.washingmachine.domain.usecase.remote.CreateEmployeeUseCase
 import com.example.washingmachine.domain.usecase.remote.CreateMachineUseCase
+import com.example.washingmachine.domain.usecase.remote.CreateStudentUseCase
 import com.example.washingmachine.domain.usecase.remote.DeleteMachineUseCase
 import com.example.washingmachine.domain.usecase.remote.EditAdminProfileUseCase
 import com.example.washingmachine.domain.usecase.remote.EditStudentProfileUseCase
@@ -102,6 +106,10 @@ val remoteUseCases = module {
     factory { CheckOutQueueUseCase(get()) }
     factory { GetMachineQueueUseCase(get()) }
     factory { StartMachineUseCase(get()) }
+
+    // Users Create
+    factory { CreateStudentUseCase(get()) }
+    factory { CreateEmployeeUseCase(get()) }
 }
 
 val localUseCases = module {
@@ -125,6 +133,7 @@ val repositories = module {
     factory<StudentProfileRepository> { StudentProfileRepositoryImpl(get()) }
     factory<MachinesRepository> { MachinesRepositoryImpl(get()) }
     factory<QueueRepository> { QueueRepositoryImpl(get()) }
+    factory<UsersCreateRepository> { UsersCreateRepositoryImpl(get()) }
 
     factory<DormitoryRepository> { DormitoryRepositoryImpl(get()) }
 }
@@ -144,7 +153,7 @@ val viewModels = module {
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { AdminProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { EmployeeViewModel() }
-    viewModel { AddStudentViewModel() }
+    viewModel { AddStudentViewModel(get()) }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
 
