@@ -45,10 +45,10 @@ class MachinesAdapter(private val actionListener: MachineCardActionListener) :
 
     override fun onClick(v: View) {
         val machineId = v.tag as String
-        actionListener.onItemClicked(machineId)
+        actionListener.onItemClicked(machineId, data.first { it.id == machineId }.name)
     }
 }
 
 interface MachineCardActionListener {
-    fun onItemClicked(machineId: String)
+    fun onItemClicked(machineId: String, machineName: String)
 }

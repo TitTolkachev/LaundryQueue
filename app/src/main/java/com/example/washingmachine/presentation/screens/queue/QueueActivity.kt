@@ -2,6 +2,7 @@ package com.example.washingmachine.presentation.screens.queue
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.washingmachine.R
@@ -11,14 +12,18 @@ import com.example.washingmachine.presentation.dialog.AlertType
 import com.example.washingmachine.presentation.dialog.showAlertDialog
 import com.example.washingmachine.presentation.screens.queue.adapters.QueueAdapter
 import com.example.washingmachine.presentation.screens.queue.adapters.QueueCardActionListener
-import com.example.washingmachine.presentation.screens.queue.model.QueueSlot
 import com.example.washingmachine.presentation.screens.queue.model.QueueSlotTypes
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
 
     private lateinit var binding: ActivityQueueBinding
+    private lateinit var viewModel: QueueViewModel
+
+    private var machineId: String? = null
+    private var machineName: String? = null
 
     private lateinit var adapter: QueueAdapter
 
@@ -27,10 +32,14 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
         binding = ActivityQueueBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val machineId = intent.getStringExtra(getString(R.string.machine_id))
+        viewModel = getViewModel()
 
-        binding.textView4.text = machineId
-        binding.textView10.text = "Active"
+        machineId = intent.getStringExtra(getString(R.string.machine_id))
+        machineName = intent.getStringExtra(getString(R.string.machine_name))
+
+        binding.textView4.text = machineName ?: ""
+        // TODO
+        binding.textView10.text = "TODO"
 
         initRecyclerView()
     }
@@ -48,41 +57,24 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
             }
         })
         binding.recyclerView5.adapter = adapter
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                adapter.data = it
-//            }
-//        }
+        viewModel.queueSlotsData.observe(this) {
+            if (it != null) {
+                adapter.data = it
+            }
+            if (it.isNullOrEmpty()) {
+                binding.textView11.visibility = View.GONE
+                binding.recyclerView5.visibility = View.GONE
+            } else {
+                binding.textView11.visibility = View.VISIBLE
+                binding.recyclerView5.visibility = View.VISIBLE
+                adapter.data = it
+            }
+        }
+    }
 
-        //TODO
-        val data = mutableListOf(
-            QueueSlot(
-                "1",
-                QueueSlotTypes.NOT_AVAILABLE,
-                ""
-            ),
-            QueueSlot(
-                "2",
-                QueueSlotTypes.AVAILABLE,
-                ""
-            ),
-            QueueSlot(
-                "3",
-                QueueSlotTypes.SELF,
-                ""
-            ),
-            QueueSlot(
-                "4",
-                QueueSlotTypes.AVAILABLE,
-                ""
-            ),
-            QueueSlot(
-                "5",
-                QueueSlotTypes.AVAILABLE,
-                ""
-            ),
-        )
-        adapter.data = data
+    override fun onResume() {
+        super.onResume()
+        machineId?.let { viewModel.update(machineId!!) }
     }
 
     private fun onAvailableSlotClicked(id: String) {
@@ -94,7 +86,7 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
     }
 
     override fun alertDialogRetry(alertType: AlertType) {
-        when(alertType) {
+        when (alertType) {
             AlertType.INTENT_FOR_QUEUE_BOOKING -> {
                 // TODO
                 Snackbar.make(binding.root, "You booked a slot in this queue", Snackbar.LENGTH_LONG)
@@ -102,6 +94,7 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
                     .setActionTextColor(Color.GRAY)
                     .show()
             }
+
             AlertType.INTENT_FOR_SLOT_CHECKOUT -> {
                 // TODO
                 Snackbar.make(binding.root, "You are not in this queue now", Snackbar.LENGTH_LONG)
@@ -109,6 +102,7 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
                     .setActionTextColor(Color.GRAY)
                     .show()
             }
+
             else -> {}
         }
     }

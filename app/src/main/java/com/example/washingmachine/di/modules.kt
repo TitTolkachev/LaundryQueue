@@ -61,6 +61,7 @@ import com.example.washingmachine.presentation.screens.editprofile.student.EditS
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
+import com.example.washingmachine.presentation.screens.queue.QueueViewModel
 import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -138,6 +139,7 @@ val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get(), get()) }
+    viewModel { QueueViewModel(get(), get()) }
     viewModel { AdminViewModel() }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }

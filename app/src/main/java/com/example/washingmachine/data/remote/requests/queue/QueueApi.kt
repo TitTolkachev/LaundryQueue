@@ -4,6 +4,7 @@ import com.example.washingmachine.data.remote.dto.QueueSlotDto
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.DELETE
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -15,7 +16,7 @@ interface QueueApi {
     @POST("api/laundry/start")
     suspend fun startMachine(): Response<ResponseBody>
 
-    @POST("api/queue/{machineId}")
+    @GET("api/queue/{machineId}")
     suspend fun getMachineQueue(@Path("machineId") machineId: String): Response<List<QueueSlotDto>>
 
     @DELETE("api/queue")

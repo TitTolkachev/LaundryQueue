@@ -6,46 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screens.queue.QueueActivity">
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:nestedScrollingEnabled="false"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/queue_machine_background"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="96dp"
+        android:paddingBottom="16dp"
+        android:text="TextView"
+        android:textColor="#3C0808"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/queue_machine_background"
-                android:paddingHorizontal="24dp"
-                android:paddingTop="96dp"
-                android:paddingBottom="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/queue_status_background"
-                android:gravity="center"
-                android:paddingTop="52dp"
-                android:paddingBottom="16dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/queue_status_background"
+        android:gravity="center"
+        android:paddingTop="52dp"
+        android:paddingBottom="16dp"
+        android:text="TextView"
+        android:textColor="#3C0808"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -63,20 +52,19 @@
                 app:layout_constraintStart_toStartOf="@+id/recyclerView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:isScrollContainer="false"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintStart_toStartOf="@+id/guideline7"
-                app:layout_constraintTop_toBottomOf="@+id/textView11"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_queue_not_available_slot" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_queue_not_available_slot" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline7"
@@ -91,6 +79,5 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.75" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

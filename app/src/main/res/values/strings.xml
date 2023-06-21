@@ -15,6 +15,7 @@
 
     <!-- Intents extras -->
     <string name="machine_id">machine_id</string>
+    <string name="machine_name">machine_name</string>
 
 
     <!-- OnBoarding -->
