@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, StudentQueueTicketsActivity::class.java)
             startActivity(intent)
         }
+
+        binding.studentMainRefreshLayout.setOnRefreshListener {
+            viewModel.update()
+        }
     }
 
     private fun initRecyclerViews() {
@@ -61,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 binding.recyclerView.visibility = View.VISIBLE
                 washingAdapter.data = it
             }
+            binding.studentMainRefreshLayout.isRefreshing = false
         }
 
         val linearLayoutManager2 = GridLayoutManager(this, 2)

@@ -51,6 +51,11 @@ class QueueAdapter(private val actionListener: QueueCardActionListener) :
                 root.tag = item.id
                 textView3.text = index.toString()
             }
+            if (item.type == QueueSlotTypes.SELF_WORKING) {
+                binding.textView2.visibility = View.INVISIBLE
+            } else{
+                binding.textView2.visibility = View.VISIBLE
+            }
         }
     }
 

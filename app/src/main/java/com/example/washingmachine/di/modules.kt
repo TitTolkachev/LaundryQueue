@@ -67,11 +67,13 @@ import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.addemployee.AddEmployeeViewModel
 import com.example.washingmachine.presentation.screens.addmachine.AddMachineViewModel
 import com.example.washingmachine.presentation.screens.addstudent.AddStudentViewModel
+import com.example.washingmachine.presentation.screens.adminmachines.AdminMachinesViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
 import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileViewModel
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
+import com.example.washingmachine.presentation.screens.employeeprofile.EmployeeProfileViewModel
 import com.example.washingmachine.presentation.screens.launch.LaunchViewModel
 import com.example.washingmachine.presentation.screens.main.MainViewModel
 import com.example.washingmachine.presentation.screens.queue.QueueViewModel
@@ -162,7 +164,7 @@ val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get(), get()) }
-    viewModel { QueueViewModel(get(), get(), get(), get()) }
+    viewModel { QueueViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { AdminProfileViewModel(get(), get(), get(), get(), get()) }
@@ -174,5 +176,7 @@ val viewModels = module {
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
     viewModel { EditPersonProfileViewModel(get(), get(), get()) }
     viewModel { StudentQueueTicketsViewModel(get(), get(), get(), get()) }
+    viewModel { EmployeeProfileViewModel(get(), get(), get(), get()) }
+    viewModel { AdminMachinesViewModel(get(), get()) }
 
 }

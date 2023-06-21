@@ -40,7 +40,21 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
 
         binding.textView4.text = machineName ?: ""
         // TODO
-        binding.textView10.text = "TODO"
+
+        binding.queueRefreshLayout.setOnRefreshListener {
+            viewModel.update(machineId!!)
+        }
+
+        viewModel.messageData.observe(this){
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)
+                .setAction("CLOSE") { }
+                .setActionTextColor(Color.GRAY)
+                .show()
+        }
+
+        viewModel.machineStatusData.observe(this){
+            binding.textView10.text = it
+        }
 
         viewModel.showTakeQueueSucceeded.observe(this) {
             if (it == true) {
@@ -78,6 +92,7 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
         })
         binding.recyclerView5.adapter = adapter
         viewModel.queueSlotsData.observe(this) {
+            binding.queueRefreshLayout.isRefreshing = false
             if (it != null) {
                 adapter.data = it
             }

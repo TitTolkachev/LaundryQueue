@@ -11,15 +11,19 @@ import com.example.washingmachine.presentation.screens.adminmachines.adapters.Ad
 import com.example.washingmachine.presentation.screens.adminmachines.adapters.AdminMachinesAdapter
 import com.example.washingmachine.presentation.screens.adminmachines.model.AdminMachineCard
 import com.example.washingmachine.presentation.screens.editmachine.EditMachineActivity
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AdminMachinesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminMachinesBinding
     private lateinit var adapter: AdminMachinesAdapter
+    private lateinit var viewModel: AdminMachinesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminMachinesBinding.inflate(layoutInflater)
+        viewModel = getViewModel()
+        viewModel.refresh()
         setContentView(binding.root)
 
         binding.button7.setOnClickListener {
@@ -43,35 +47,11 @@ class AdminMachinesActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = linearLayoutManager
         adapter = AdminMachinesAdapter(actionListenerImpl)
         binding.recyclerView.adapter = adapter
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                washingAdapter1.data = it
-//            }
-//        }
 
 
-        //TODO
-        val data = mutableListOf(
-            AdminMachineCard(
-                "123", "Active", 3
-            ),
-            AdminMachineCard(
-                "321", "Paused", 5
-            ),
-            AdminMachineCard(
-                "123", "Active", 3
-            ),
-            AdminMachineCard(
-                "321", "Paused", 5
-            ),
-            AdminMachineCard(
-                "123", "Active", 3
-            ),
-            AdminMachineCard(
-                "321", "Paused", 5
-            )
-        )
-        adapter.data = data
+        viewModel.getMachinesLiveData().observe(this) {
+            adapter.data = it
+        }
     }
 
     private fun onMachineCardClicked(machineId: String) {

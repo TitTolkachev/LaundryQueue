@@ -48,6 +48,9 @@
             android:name=".presentation.screens.editprofile.student.EditStudentProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.screens.employeeprofile.EmployeeProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.screens.editprofile.person.EditPersonProfileActivity"
             android:exported="false" />
         <activity

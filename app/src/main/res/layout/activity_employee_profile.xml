@@ -8,29 +8,6 @@
 
 
     <TextView
-        android:id="@+id/adminBalance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-20dp"
-        android:text="500"
-        android:textColor="#F5C049"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/adminBalance"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toEndOf="@+id/adminBalance"
-        app:layout_constraintTop_toTopOf="@+id/adminBalance"
-        app:srcCompat="@drawable/icon_admin_machines_coin" />
-
-    <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,18 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/takeOutMoneyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="28dp"
-        android:paddingVertical="12dp"
-        android:text="Take money out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminBalance" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline13"
         android:layout_width="wrap_content"
@@ -60,7 +25,7 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <Button
-        android:id="@+id/adminLogoutButton"
+        android:id="@+id/employeeLogoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
@@ -84,7 +49,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-        android:id="@+id/editAdminButton"
+        android:id="@+id/editEmployeeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -101,7 +66,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/adminName"
+        android:id="@+id/employeeName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -117,7 +82,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
     <TextView
-        android:id="@+id/adminSurname"
+        android:id="@+id/employeeSurname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -133,7 +98,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline14" />
 
     <TextView
-        android:id="@+id/adminEmail"
+        android:id="@+id/employeeEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -142,16 +107,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminName" />
+        app:layout_constraintTop_toBottomOf="@+id/employeeName" />
 
     <TextView
-        android:id="@+id/adminDormitory"
+        android:id="@+id/employeeDormitory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/employeeEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

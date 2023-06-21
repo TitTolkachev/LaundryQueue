@@ -21,9 +21,13 @@ class StudentQueueTicketsViewModel(
     ViewModel() {
     private val myTicketsUpdatedLiveData = MutableLiveData(false)
 
+    private val messageLiveData = MutableLiveData<String>()
+
     private val myTickets = mutableListOf<MachineSlot>()
 
     fun getMyTicketsLiveData(): LiveData<Boolean> = myTicketsUpdatedLiveData
+
+    fun getMessageLiveData(): LiveData<String> = messageLiveData
 
     fun getMyTickets() = myTickets
 
@@ -31,11 +35,11 @@ class StudentQueueTicketsViewModel(
         viewModelScope.launch {
             when (val data = startMachineUseCase.execute()) {
                 is Resource.Success -> {
-
+                    messageLiveData.postValue("Started")
                 }
 
                 else -> {
-
+                    messageLiveData.postValue("Start error")
                 }
             }
         }
@@ -45,11 +49,11 @@ class StudentQueueTicketsViewModel(
         viewModelScope.launch {
             when (val data = checkOutQueueUseCase.execute()) {
                 is Resource.Success -> {
-
+                    messageLiveData.postValue("Successfully checked out")
                 }
 
                 else -> {
-
+                    messageLiveData.postValue("Error in checked out")
                 }
             }
         }
@@ -64,8 +68,6 @@ class StudentQueueTicketsViewModel(
 
                         is Resource.Success -> {
                             myTickets.clear()
-
-
 
                             queue.data?.filter { it.location == data.data.dormitory.id }
                                 ?.forEach {
@@ -88,13 +90,13 @@ class StudentQueueTicketsViewModel(
                         }
 
                         else -> {
-
+                            messageLiveData.postValue("Error for get machines data")
                         }
                     }
                 }
 
                 else -> {
-
+                    messageLiveData.postValue("Error for get user data")
                 }
             }
         }

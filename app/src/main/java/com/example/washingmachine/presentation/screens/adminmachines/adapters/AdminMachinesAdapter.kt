@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.washingmachine.databinding.ItemAdminMachineCardBinding
+import com.example.washingmachine.domain.model.Machine
 import com.example.washingmachine.presentation.screens.adminmachines.model.AdminMachineCard
 
 class AdminMachinesAdapter(private val actionListener: AdminMachineCardActionListener) :
     RecyclerView.Adapter<AdminMachinesAdapter.MachinesViewHolder>(),
     View.OnClickListener {
 
-    var data: MutableList<AdminMachineCard> = mutableListOf()
+    var data: MutableList<Machine> = mutableListOf()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -21,10 +22,11 @@ class AdminMachinesAdapter(private val actionListener: AdminMachineCardActionLis
 
     class MachinesViewHolder(var binding: ItemAdminMachineCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AdminMachineCard) {
+        fun bind(item: Machine) {
             with(binding) {
                 root.tag = item.id
                 textView2.text = item.status
+                textView15.text = item.name
             }
         }
     }

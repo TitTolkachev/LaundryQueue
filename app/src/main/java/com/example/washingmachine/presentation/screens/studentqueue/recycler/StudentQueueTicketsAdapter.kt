@@ -22,18 +22,22 @@ class StudentQueueTicketsAdapter(
             binding.machineName.text = item.machineName
             binding.positionInQueue.text = "You are ${item.number} in queue"
 
-            if (item.machineStatus == "READY_TO_WORK" && item.number == 1){
+            if (item.machineStatus == "READY_TO_WORK" && item.number == 1) {
                 binding.quitButton.visibility = View.VISIBLE
                 binding.startButton.visibility = View.VISIBLE
             }
 
-            if (item.machineStatus == "WORKING" && item.number == 1){
+            if (item.machineStatus == "WORKING" && item.number == 1) {
                 binding.quitButton.visibility = View.INVISIBLE
                 binding.startButton.visibility = View.INVISIBLE
                 binding.positionInQueue.text = "Your clothes still in progress"
             }
 
-            if((item.number ?: 0) > 1){
+            if ((item.number ?: 0) > 1) {
+                binding.quitButton.visibility = View.VISIBLE
+            }
+
+            if ((item.number ?: 0) > 1) {
                 binding.startButton.visibility = View.INVISIBLE
             }
 
