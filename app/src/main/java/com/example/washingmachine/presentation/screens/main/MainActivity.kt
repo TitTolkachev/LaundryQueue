@@ -2,13 +2,13 @@ package com.example.washingmachine.presentation.screens.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.washingmachine.R
 import com.example.washingmachine.databinding.ActivityMainBinding
 import com.example.washingmachine.presentation.screens.main.adapters.MachineCardActionListener
 import com.example.washingmachine.presentation.screens.main.adapters.MachinesAdapter
-import com.example.washingmachine.presentation.screens.main.model.MachineCard
 import com.example.washingmachine.presentation.screens.queue.QueueActivity
 import com.example.washingmachine.presentation.screens.studentprofile.StudentProfileActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -18,10 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
 
-    private lateinit var washingAdapter1: MachinesAdapter
-    private lateinit var washingAdapter2: MachinesAdapter
-    private lateinit var dryerAdapter1: MachinesAdapter
-    private lateinit var dryerAdapter2: MachinesAdapter
+    private lateinit var washingAdapter: MachinesAdapter
+    private lateinit var dryerAdapter: MachinesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,64 +42,43 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val linearLayoutManager =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager = GridLayoutManager(this, 2)
         binding.recyclerView.layoutManager = linearLayoutManager
-        washingAdapter1 = MachinesAdapter(actionListenerImpl)
-        binding.recyclerView.adapter = washingAdapter1
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                washingAdapter1.data = it
-//            }
-//        }
+        washingAdapter = MachinesAdapter(actionListenerImpl)
+        binding.recyclerView.adapter = washingAdapter
+        viewModel.washingMachinesData.observe(this) {
+            if (it.isNullOrEmpty()) {
+                binding.textView8.visibility = View.GONE
+                binding.recyclerView.visibility = View.GONE
+            } else {
+                binding.textView8.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.VISIBLE
+                washingAdapter.data = it.toMutableList()
+            }
+        }
 
-        val linearLayoutManager2 =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView2.layoutManager = linearLayoutManager2
-        washingAdapter2 = MachinesAdapter(actionListenerImpl)
-        binding.recyclerView2.adapter = washingAdapter2
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                washingAdapter2.data = it
-//            }
-//        }
+        val linearLayoutManager2 = GridLayoutManager(this, 2)
+        binding.recyclerView3.layoutManager = linearLayoutManager2
+        dryerAdapter = MachinesAdapter(actionListenerImpl)
+        binding.recyclerView3.adapter = dryerAdapter
+        viewModel.dryingMachinesData.observe(this) {
+            if (it != null) {
+                dryerAdapter.data = it
+            }
+            if (it.isNullOrEmpty()) {
+                binding.textView9.visibility = View.GONE
+                binding.recyclerView3.visibility = View.GONE
+            } else {
+                binding.textView9.visibility = View.VISIBLE
+                binding.recyclerView3.visibility = View.VISIBLE
+                dryerAdapter.data = it
+            }
+        }
+    }
 
-        val linearLayoutManager3 =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView3.layoutManager = linearLayoutManager3
-        dryerAdapter1 = MachinesAdapter(actionListenerImpl)
-        binding.recyclerView3.adapter = dryerAdapter1
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                dryerAdapter1.data = it
-//            }
-//        }
-
-        val linearLayoutManager4 =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView4.layoutManager = linearLayoutManager4
-        dryerAdapter2 = MachinesAdapter(actionListenerImpl)
-        binding.recyclerView4.adapter = dryerAdapter2
-//        viewModel...observe(this) {
-//            if (it != null) {
-//                dryerAdapter2.data = it
-//            }
-//        }
-
-
-        //TODO
-        val data = mutableListOf(
-            MachineCard(
-                "123", "Active", 3
-            ),
-            MachineCard(
-                "321", "Paused", 5
-            )
-        )
-        washingAdapter1.data = data
-        washingAdapter2.data = data
-        dryerAdapter1.data = data
-        dryerAdapter2.data = data
+    override fun onResume() {
+        super.onResume()
+        viewModel.update()
     }
 
     private fun onMachineCardClicked(machineId: String) {

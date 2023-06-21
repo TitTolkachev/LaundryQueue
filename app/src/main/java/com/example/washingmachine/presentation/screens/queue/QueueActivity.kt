@@ -86,18 +86,31 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
     }
 
     private fun onAvailableSlotClicked(id: String) {
-        showAlertDialog(AlertType.DEFAULT)//viewModel.alertType.value ?: AlertType.DEFAULT)
+        showAlertDialog(AlertType.INTENT_FOR_QUEUE_BOOKING)
     }
 
     private fun onSlotCancelClicked(id: String) {
-        showAlertDialog(AlertType.INTENT_FOR_QUEUE_BOOKING)//viewModel.alertType.value ?: AlertType.DEFAULT)
+        showAlertDialog(AlertType.INTENT_FOR_SLOT_CHECKOUT)
     }
 
-    override fun alertDialogRetry() {
-        Snackbar.make(binding.root, "", Snackbar.LENGTH_LONG)
-            .setAction("CLOSE") { }
-            .setActionTextColor(Color.GREEN)
-            .show()
+    override fun alertDialogRetry(alertType: AlertType) {
+        when(alertType) {
+            AlertType.INTENT_FOR_QUEUE_BOOKING -> {
+                // TODO
+                Snackbar.make(binding.root, "You booked a slot in this queue", Snackbar.LENGTH_LONG)
+                    .setAction("CLOSE") { }
+                    .setActionTextColor(Color.GRAY)
+                    .show()
+            }
+            AlertType.INTENT_FOR_SLOT_CHECKOUT -> {
+                // TODO
+                Snackbar.make(binding.root, "You are not in this queue now", Snackbar.LENGTH_LONG)
+                    .setAction("CLOSE") { }
+                    .setActionTextColor(Color.GRAY)
+                    .show()
+            }
+            else -> {}
+        }
     }
 
     override fun onAlertDialogDismiss() {}

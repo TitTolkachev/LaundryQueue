@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginVertical="12dp"
-    app:cardBackgroundColor="#000000"
+    app:cardBackgroundColor="#EC3939"
     app:cardCornerRadius="12dp">
 
     <androidx.cardview.widget.CardView

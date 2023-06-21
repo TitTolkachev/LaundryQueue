@@ -57,6 +57,7 @@ import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
 import com.example.washingmachine.presentation.screens.admin.AdminViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileViewModel
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
@@ -138,7 +139,7 @@ val storage = module {
 val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
     viewModel { AdminViewModel() }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
