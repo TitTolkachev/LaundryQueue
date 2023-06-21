@@ -16,7 +16,6 @@ import com.example.washingmachine.presentation.screens.queue.model.QueueSlotType
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-
 class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
 
     private lateinit var binding: ActivityQueueBinding
@@ -24,6 +23,8 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
 
     private var machineId: String? = null
     private var machineName: String? = null
+
+    private var slotId: String? = null
 
     private lateinit var adapter: QueueAdapter
 
@@ -40,6 +41,25 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
         binding.textView4.text = machineName ?: ""
         // TODO
         binding.textView10.text = "TODO"
+
+        viewModel.showTakeQueueSucceeded.observe(this) {
+            if (it == true) {
+                machineId?.let { viewModel.update(machineId!!) }
+                Snackbar.make(binding.root, "You booked a slot in this queue", Snackbar.LENGTH_LONG)
+                    .setAction("CLOSE") { }
+                    .setActionTextColor(Color.GRAY)
+                    .show()
+            }
+        }
+
+        viewModel.showCheckoutSucceeded.observe(this) {
+            if (it == true) {
+                Snackbar.make(binding.root, "You are not in this queue now", Snackbar.LENGTH_LONG)
+                    .setAction("CLOSE") { }
+                    .setActionTextColor(Color.GRAY)
+                    .show()
+            }
+        }
 
         initRecyclerView()
     }
@@ -78,29 +98,23 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
     }
 
     private fun onAvailableSlotClicked(id: String) {
+        slotId = id
         showAlertDialog(AlertType.INTENT_FOR_QUEUE_BOOKING)
     }
 
     private fun onSlotCancelClicked(id: String) {
+        slotId = id
         showAlertDialog(AlertType.INTENT_FOR_SLOT_CHECKOUT)
     }
 
     override fun alertDialogRetry(alertType: AlertType) {
         when (alertType) {
             AlertType.INTENT_FOR_QUEUE_BOOKING -> {
-                // TODO
-                Snackbar.make(binding.root, "You booked a slot in this queue", Snackbar.LENGTH_LONG)
-                    .setAction("CLOSE") { }
-                    .setActionTextColor(Color.GRAY)
-                    .show()
+                viewModel.takeQueue(slotId ?: "")
             }
 
             AlertType.INTENT_FOR_SLOT_CHECKOUT -> {
-                // TODO
-                Snackbar.make(binding.root, "You are not in this queue now", Snackbar.LENGTH_LONG)
-                    .setAction("CLOSE") { }
-                    .setActionTextColor(Color.GRAY)
-                    .show()
+                viewModel.checkout()
             }
 
             else -> {}

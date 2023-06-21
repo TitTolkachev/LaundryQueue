@@ -36,21 +36,23 @@
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/main_title_background"
-                android:gravity="center"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="10dp"
-                android:text="Slots"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/recyclerView5"
-                app:layout_constraintStart_toStartOf="@+id/recyclerView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/main_title_background"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:text="Slots"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView5"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView5"
@@ -58,26 +60,13 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:overScrollMode="never"
+        android:paddingHorizontal="100dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:itemCount="5"
         tools:listitem="@layout/item_queue_not_available_slot" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

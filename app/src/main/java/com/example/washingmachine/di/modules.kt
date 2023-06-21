@@ -54,7 +54,7 @@ import com.example.washingmachine.domain.usecase.remote.SignInUseCase
 import com.example.washingmachine.domain.usecase.remote.StartMachineUseCase
 import com.example.washingmachine.domain.usecase.remote.TakeOutBalanceUseCase
 import com.example.washingmachine.domain.usecase.remote.TopUpBalanceUseCase
-import com.example.washingmachine.presentation.screens.admin.AdminViewModel
+import com.example.washingmachine.presentation.screens.addstudent.AddStudentViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
@@ -139,12 +139,12 @@ val viewModels = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
     viewModel { LaunchViewModel(get(), get(), get(), get()) }
     viewModel { MainViewModel(get(), get()) }
-    viewModel { QueueViewModel(get(), get()) }
-    viewModel { AdminViewModel() }
+    viewModel { QueueViewModel(get(), get(), get(), get()) }
 
     viewModel { StudentProfileViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { AdminProfileViewModel(get(), get(), get(), get(), get()) }
     viewModel { EmployeeViewModel() }
+    viewModel { AddStudentViewModel() }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
 
