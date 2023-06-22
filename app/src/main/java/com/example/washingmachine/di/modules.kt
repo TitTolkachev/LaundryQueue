@@ -173,7 +173,7 @@ val viewModels = module {
     viewModel { AddStudentViewModel(get()) }
     viewModel { AddEmployeeViewModel(get()) }
     viewModel { AddMachineViewModel(get(), get()) }
-    viewModel { EditMachineViewModel(get(), get(), get()) }
+    viewModel { EditMachineViewModel(get(), get()) }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
     viewModel { EditPersonProfileViewModel(get(), get(), get()) }

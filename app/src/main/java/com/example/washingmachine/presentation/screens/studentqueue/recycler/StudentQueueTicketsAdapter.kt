@@ -50,7 +50,7 @@ class StudentQueueTicketsAdapter(
 
                 val dt = LocalDateTime.parse(item.startTime).plusHours(getZoneOffset())
                 binding.startTime.text =
-                    "Started at" + dt.format(DateTimeFormatter.ofPattern("HH:mm")).toString()
+                    "Started at " + dt.format(DateTimeFormatter.ofPattern("HH:mm")).toString()
             }
 
             if ((item.number ?: 0) > 1) {
