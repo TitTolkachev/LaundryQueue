@@ -6,5 +6,6 @@ data class MachineSlot(
     val personId: String?,
     val status: String?,
     val machineStatus: String?,
-    val machineName: String?
+    val machineName: String?,
+    val startTime: String?
 )

@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = linearLayoutManager
         washingAdapter = MachinesAdapter(actionListenerImpl)
         binding.recyclerView.adapter = washingAdapter
+
+
+        viewModel.studentProfileData.observe(this) {
+            binding.textView5.text = it.dormitory?.number.toString() + " dormitory"
+        }
+
         viewModel.washingMachinesData.observe(this) {
             if (it.isNullOrEmpty()) {
                 binding.textView8.visibility = View.GONE
