@@ -70,6 +70,7 @@ import com.example.washingmachine.presentation.screens.addstudent.AddStudentView
 import com.example.washingmachine.presentation.screens.adminmachines.AdminMachinesViewModel
 import com.example.washingmachine.presentation.screens.adminprofile.AdminProfileViewModel
 import com.example.washingmachine.presentation.screens.auth.AuthViewModel
+import com.example.washingmachine.presentation.screens.editmachine.EditMachineViewModel
 import com.example.washingmachine.presentation.screens.editprofile.person.EditPersonProfileViewModel
 import com.example.washingmachine.presentation.screens.editprofile.student.EditStudentProfileViewModel
 import com.example.washingmachine.presentation.screens.employee.EmployeeViewModel
@@ -172,6 +173,7 @@ val viewModels = module {
     viewModel { AddStudentViewModel(get()) }
     viewModel { AddEmployeeViewModel(get()) }
     viewModel { AddMachineViewModel(get(), get()) }
+    viewModel { EditMachineViewModel(get(), get(), get()) }
 
     viewModel { EditStudentProfileViewModel(get(), get(), get()) }
     viewModel { EditPersonProfileViewModel(get(), get(), get()) }
