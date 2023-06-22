@@ -39,6 +39,7 @@ class QueueActivity : AppCompatActivity(), AlertDialog.IAlertDialogListener {
         machineName = intent.getStringExtra(getString(R.string.machine_name))
 
         binding.textView4.text = machineName ?: ""
+
         // TODO
 
         binding.queueRefreshLayout.setOnRefreshListener {

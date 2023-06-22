@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.washingmachine.domain.model.Machine
+import com.example.washingmachine.domain.model.StudentInfo
 import com.example.washingmachine.domain.usecase.remote.GetMachinesUseCase
 import com.example.washingmachine.domain.usecase.remote.GetStudentProfileUseCase
 import com.example.washingmachine.domain.util.Resource
@@ -24,12 +25,19 @@ class MainViewModel(
     private val _dryingMachinesData = MutableLiveData<MutableList<MachineCard>>()
     val dryingMachinesData: LiveData<MutableList<MachineCard>> = _dryingMachinesData
 
+    private val _studentProfileData = MutableLiveData<StudentInfo>()
+    val studentProfileData: LiveData<StudentInfo> = _studentProfileData
+
     private lateinit var dormitoryId: String
 
     fun update() {
         viewModelScope.launch {
             when (val profileRequest = getStudentProfileUseCase.execute()) {
                 is Resource.Success -> {
+                    if (profileRequest.data != null){
+                        _studentProfileData.postValue(profileRequest.data!!)
+                    }
+
                     val id = profileRequest.data?.dormitory?.id
                     if (!id.isNullOrEmpty())
                         dormitoryId = id

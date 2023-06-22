@@ -80,7 +80,8 @@ class StudentQueueTicketsViewModel(
                                                 slot.personId,
                                                 slot.status,
                                                 it.status,
-                                                it.name
+                                                it.name,
+                                                it.startTime
                                             )
                                         )
                                     }

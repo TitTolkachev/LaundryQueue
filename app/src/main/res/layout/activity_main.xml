@@ -70,7 +70,7 @@
                 android:gravity="bottom|center_horizontal"
                 android:paddingVertical="16dp"
                 android:singleLine="true"
-                android:text="Dormitory"
+                tools:text="Dormitory"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/goToStudentProfile"

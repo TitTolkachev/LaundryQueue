@@ -6,12 +6,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.washingmachine.databinding.StudentQueueTicketBinding
 import com.example.washingmachine.presentation.screens.studentqueue.model.MachineSlot
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.GregorianCalendar
+import java.util.concurrent.TimeUnit
 
 class StudentQueueTicketsAdapter(
     private val clickListener: QueueTicketClickListener,
     private val data: MutableList<MachineSlot>
 ) :
     RecyclerView.Adapter<StudentQueueTicketsAdapter.StudentQueueTicketViewHolder>() {
+
+    private fun getZoneOffset(): Long {
+        val mCalendar: Calendar = GregorianCalendar()
+        val mTimeZone = mCalendar.timeZone
+        val mGMTOffset = mTimeZone.rawOffset.toLong()
+        return TimeUnit.HOURS.convert(mGMTOffset, TimeUnit.MILLISECONDS)
+    }
 
 
     inner class StudentQueueTicketViewHolder(var binding: StudentQueueTicketBinding) :
@@ -22,6 +34,8 @@ class StudentQueueTicketsAdapter(
             binding.machineName.text = item.machineName
             binding.positionInQueue.text = "You are ${item.number} in queue"
 
+            binding.startTime.visibility = View.INVISIBLE
+
             if (item.machineStatus == "READY_TO_WORK" && item.number == 1) {
                 binding.quitButton.visibility = View.VISIBLE
                 binding.startButton.visibility = View.VISIBLE
@@ -31,6 +45,12 @@ class StudentQueueTicketsAdapter(
                 binding.quitButton.visibility = View.INVISIBLE
                 binding.startButton.visibility = View.INVISIBLE
                 binding.positionInQueue.text = "Your clothes still in progress"
+                binding.startTime.visibility = View.VISIBLE
+
+
+                val dt = LocalDateTime.parse(item.startTime).plusHours(getZoneOffset())
+                binding.startTime.text =
+                    "Started at" + dt.format(DateTimeFormatter.ofPattern("HH:mm")).toString()
             }
 
             if ((item.number ?: 0) > 1) {
