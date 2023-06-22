@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.washingmachine.databinding.ActivityPersonEditProfileBinding
 import com.example.washingmachine.domain.model.Roles
 import com.example.washingmachine.presentation.screens.admin.AdminActivity
+import com.example.washingmachine.presentation.screens.employee.EmployeeActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class EditPersonProfileActivity : AppCompatActivity() {
@@ -29,14 +30,18 @@ class EditPersonProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.personSaveChangesButton.setOnClickListener {
+
+            val dormitoryId = selectedDormitory?.let {
+                viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
+                    ?: ""
+            } ?: viewModel.dormitories.firstOrNull()?.id ?: ""
+
             viewModel.save(
                 binding.personChangeEmail.text.toString(),
                 binding.personChangeName.text.toString(),
                 binding.personChangeSurname.text.toString(),
-                viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
-                    ?: ""
+                dormitoryId
             )
         }
 
@@ -44,7 +49,6 @@ class EditPersonProfileActivity : AppCompatActivity() {
             binding.personChangeEmail.setText(data.email.toString())
             binding.personChangeName.setText(data.name.toString())
             binding.personChangeSurname.setText(data.surname.toString())
-            selectedDormitory = data.dormitory?.number.toString()
         }
 
         viewModel.getDormitoriesLiveData().observe(this) {
@@ -87,8 +91,7 @@ class EditPersonProfileActivity : AppCompatActivity() {
                     }
 
                     else -> {
-                        // TODO(EMPLOYEE ACTIVITY)
-                        Intent(this, AdminActivity::class.java)
+                        Intent(this, EmployeeActivity::class.java)
                     }
                 }
 

@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.example.washingmachine.data.remote.dto.DormitoryDto
 import com.example.washingmachine.databinding.ActivityStudentEditProfileBinding
 import com.example.washingmachine.presentation.screens.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -32,13 +31,18 @@ class EditStudentProfileActivity : AppCompatActivity() {
 
 
         binding.studentSaveChangesButton.setOnClickListener {
+
+            val dormitoryId = selectedDormitory?.let {
+                viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
+                    ?: ""
+            } ?: viewModel.dormitories.firstOrNull()?.id ?: ""
+
             viewModel.save(
                 binding.studentChangeEmail.text.toString(),
                 binding.studentChangeName.text.toString(),
                 binding.studentChangeSurname.text.toString(),
                 binding.studentChangeRoom.text.toString(),
-                viewModel.dormitories.firstOrNull { it.number.toString() == selectedDormitory }?.id
-                    ?: ""
+                dormitoryId
             )
         }
 
@@ -47,7 +51,6 @@ class EditStudentProfileActivity : AppCompatActivity() {
             binding.studentChangeName.setText(data.name.toString())
             binding.studentChangeSurname.setText(data.surname.toString())
             binding.studentChangeRoom.setText(data.room.toString())
-            selectedDormitory = data.dormitory?.number.toString()
         }
 
         viewModel.getDormitoriesLiveData().observe(this) {
