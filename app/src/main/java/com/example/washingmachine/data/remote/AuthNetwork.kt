@@ -33,9 +33,9 @@ class AuthNetwork(
         //useCases: AuthNetworkUseCases
     ): OkHttpClient {
         val client = OkHttpClient.Builder().apply {
+            retryOnConnectionFailure(true)
             connectTimeout(5, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
-            retryOnConnectionFailure(false)
             val logLevel = HttpLoggingInterceptor.Level.BODY
             addInterceptor(HttpLoggingInterceptor().setLevel(logLevel))
             //addInterceptor(AuthInterceptor(useCases.getTokenFromLocalStorageUseCase))
