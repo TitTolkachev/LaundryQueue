@@ -17,8 +17,11 @@ class AdminMachinesViewModel(
     ViewModel() {
     private val machinesLiveData = MutableLiveData<MutableList<Machine>>()
 
+    private lateinit var dormitoryName: String
+
     fun getMachinesLiveData(): LiveData<MutableList<Machine>> = machinesLiveData
 
+    fun getDormitoryName() = dormitoryName
 
     fun refresh() {
         viewModelScope.launch {
@@ -26,6 +29,7 @@ class AdminMachinesViewModel(
             when (val data = getAdminProfileUseCase.execute()) {
                 is Resource.Success -> {
                     dormitoryId = data.data?.dormitory?.id
+                    dormitoryName = data.data?.dormitory?.number.toString()
                 }
 
                 else -> {
@@ -36,7 +40,7 @@ class AdminMachinesViewModel(
 
             when (val data = getMachinesUseCase.execute(dormitoryId ?: "")) {
                 is Resource.Success -> {
-                    if (!data.data.isNullOrEmpty()){
+                    if (!data.data.isNullOrEmpty()) {
                         machinesLiveData.postValue(data.data.toMutableList())
                     }
                 }

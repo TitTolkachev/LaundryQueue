@@ -9,7 +9,6 @@ import com.example.washingmachine.databinding.ActivityAdminMachinesBinding
 import com.example.washingmachine.presentation.screens.addmachine.AddMachineActivity
 import com.example.washingmachine.presentation.screens.adminmachines.adapters.AdminMachineCardActionListener
 import com.example.washingmachine.presentation.screens.adminmachines.adapters.AdminMachinesAdapter
-import com.example.washingmachine.presentation.screens.adminmachines.model.AdminMachineCard
 import com.example.washingmachine.presentation.screens.editmachine.EditMachineActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -29,6 +28,10 @@ class AdminMachinesActivity : AppCompatActivity() {
         binding.button7.setOnClickListener {
             val intent = Intent(this, AddMachineActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.adminMachinesRefreshLayout.setOnRefreshListener {
+            viewModel.refresh()
         }
 
         initRecyclerViews()
@@ -51,6 +54,8 @@ class AdminMachinesActivity : AppCompatActivity() {
 
         viewModel.getMachinesLiveData().observe(this) {
             adapter.data = it
+            binding.adminMachinesRefreshLayout.isRefreshing = false
+            binding.textView5.text = viewModel.getDormitoryName() + " dormitory"
         }
     }
 
